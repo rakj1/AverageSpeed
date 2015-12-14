@@ -60,7 +60,7 @@ public class CustomAdapter extends BaseAdapter implements View.OnClickListener
 
         public TextView text;
         public TextView text1;
-        public TextView textWide;
+        public TextView text2;
         public ImageView image;
     }
 
@@ -79,6 +79,7 @@ public class CustomAdapter extends BaseAdapter implements View.OnClickListener
             holder = new ViewHolder();
             holder.text = (TextView) vi.findViewById(R.id.text);
             holder.text1=(TextView)vi.findViewById(R.id.text1);
+            holder.text2=(TextView)vi.findViewById(R.id.text2);
             holder.image=(ImageView)vi.findViewById(R.id.image);
 
             /************  Set holder with LayoutInflater ************/
@@ -99,8 +100,9 @@ public class CustomAdapter extends BaseAdapter implements View.OnClickListener
 
             /************  Set Model values in Holder elements ***********/
 
-            holder.text.setText( tempValues.getName() );
-            holder.text1.setText( tempValues.getTripTime() );
+            holder.text.setText(tempValues.getName());
+            holder.text1.setText(tempValues.getTripTime());
+            holder.text2.setText(tempValues.getTripDistance());
             holder.image.setImageResource(
                     res.getIdentifier("com.androidexample.customlistview:drawable/"+tempValues.getTripDistance(),null,null));
 

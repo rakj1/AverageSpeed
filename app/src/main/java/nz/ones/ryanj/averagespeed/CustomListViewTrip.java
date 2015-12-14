@@ -30,7 +30,7 @@ public class CustomListViewTrip extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_list_view_trip);
 
-        /***Boring UI binding**/
+        /********Boring UI binding********/
         /*Floating Button*/
         FloatingActionButton floatingAdd = (FloatingActionButton) findViewById(R.id.floatingAdd);
         floatingAdd.setOnClickListener(new View.OnClickListener() {
