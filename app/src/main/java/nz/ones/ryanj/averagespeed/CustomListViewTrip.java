@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -15,7 +16,7 @@ import static android.util.Log.d;
 /**
  * Created by Ryan Jones on 14/12/2015.
  */
-public class CustomListViewTrip extends Activity {
+public class CustomListViewTrip extends AppCompatActivity{
 
     private final String DEBUG_TAG =  "AverageSpeed." + getClass().getCanonicalName();
 
