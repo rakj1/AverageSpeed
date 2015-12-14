@@ -22,7 +22,7 @@ public class CustomListViewTrip extends Activity {
     ListView list;
     CustomAdapter adapter;
     public CustomListViewTrip CustomListView = null;
-    public  ArrayList<ListModel> CustomListViewValuesArr = new ArrayList<>();
+    public  ArrayList<ListTrip> CustomListViewValuesArr = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +39,11 @@ public class CustomListViewTrip extends Activity {
 
                 d(DEBUG_TAG, "Add button clicked");
 
-                ListModel sched = new ListModel();
-                sched.setCompanyName("Company ");
-                sched.setImage("image");
-                sched.setUrl("http:\\www.test.com");
-                CustomListViewValuesArr.add(sched);
+                ListTrip trip = new ListTrip();
+                trip.setName("Trip");
+                trip.setTripDistance("Distance");
+                trip.setTripTime("Time");
+                CustomListViewValuesArr.add(trip);
 
                 refresh();
             }
@@ -70,9 +70,9 @@ public class CustomListViewTrip extends Activity {
     /*****************  This function used by adapter ****************/
     public void onItemClick(int mPosition)
     {
-        ListModel tempValues = (ListModel) CustomListViewValuesArr.get(mPosition);
+        ListTrip tempValues = (ListTrip) CustomListViewValuesArr.get(mPosition);
 
         // SHOW ALERT
-        Toast.makeText(CustomListView, tempValues.getCompanyName() + " Image:"+tempValues.getImage()+"Url:"+tempValues.getUrl(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(CustomListView, tempValues.getName() + " Image:"+tempValues.getTripDistance()+"Url:"+tempValues.getTripTime(),Toast.LENGTH_SHORT).show();
     }
 }
