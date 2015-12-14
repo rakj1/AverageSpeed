@@ -5,16 +5,19 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import static android.util.Log.d;
+
 /**
  * Created by Ryan Jones on 14/12/2015.
  */
 public class CustomListViewTrip extends Activity {
+
+    private final String DEBUG_TAG =  "AverageSpeed." + getClass().getCanonicalName();
 
     ListView list;
     CustomAdapter adapter;
@@ -34,27 +37,34 @@ public class CustomListViewTrip extends Activity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(getBaseContext(), "add clicked:", Toast.LENGTH_SHORT).show();
+                d(DEBUG_TAG, "Add button clicked");
 
+                ListModel sched = new ListModel();
+                sched.setCompanyName("Company ");
+                sched.setImage("image");
+                sched.setUrl("http:\\www.test.com");
+                CustomListViewValuesArr.add(sched);
+
+                refresh();
             }
-
         });
 
         CustomListView = this;
-
-        /******** Take some data in Arraylist ( CustomListViewValuesArr ) ***********/
-        Resources res = getResources();
-        list= (ListView)findViewById(R.id.list);  // List defined in XML ( See Below )
-
-        /**************** Create Custom Adapter *********/
-        adapter = new CustomAdapter( CustomListView, CustomListViewValuesArr,res );
-        list.setAdapter(adapter);
-
+        refresh();
     }
 
     public void refresh()
     {
-        
+        d(DEBUG_TAG, "Refreshing");
+
+        /******** Take some data in Arraylist ( CustomListViewValuesArr ) ***********/
+        Resources res = getResources();
+        list = (ListView)findViewById(R.id.tripList);
+
+        /******** Create Custom Adapter *********/
+        adapter = new CustomAdapter( CustomListView, CustomListViewValuesArr,res );
+        list.setAdapter(adapter);
+        list.deferNotifyDataSetChanged();
     }
 
     /*****************  This function used by adapter ****************/
