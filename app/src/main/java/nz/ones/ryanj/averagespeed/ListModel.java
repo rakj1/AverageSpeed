@@ -5,39 +5,41 @@ package nz.ones.ryanj.averagespeed;
  */
 public class ListModel
 {
-    private String TripTime = "";
-    private String TripDistance = "";
-    private String TripName = "";
+    private  String CompanyName="";
+    private  String Image="";
+    private  String Url="";
 
     /*********** Set Methods ******************/
-    public void setTripTime(String Time)
+
+    public void setCompanyName(String CompanyName)
     {
-        this.TripTime = Time;
+        this.CompanyName = CompanyName;
     }
 
-    public void setTripDistance(String Distance)
+    public void setImage(String Image)
     {
-        this.TripDistance = Distance;
+        this.Image = Image;
     }
 
-    public void setTripName(String Name)
+    public void setUrl(String Url)
     {
-        this.TripName = Name;
+        this.Url = Url;
     }
 
     /*********** Get Methods ****************/
-    public String getTripTime()
+
+    public String getCompanyName()
     {
-        return TripTime;
+        return this.CompanyName;
     }
 
-    public String getTripDistance()
+    public String getImage()
     {
-        return TripDistance;
+        return this.Image;
     }
 
-    public String getTripName()
+    public String getUrl()
     {
-        return TripName;
+        return this.Url;
     }
 }
