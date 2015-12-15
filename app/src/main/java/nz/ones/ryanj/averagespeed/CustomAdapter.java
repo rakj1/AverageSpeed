@@ -58,9 +58,9 @@ public class CustomAdapter extends BaseAdapter implements View.OnClickListener
     /********* Create a holder Class to contain inflated xml file elements *********/
     public static class ViewHolder{
 
-        public TextView text;
-        public TextView text1;
-        public TextView text2;
+        public TextView name;
+        public TextView time;
+        public TextView distance;
         public ImageView image;
     }
 
@@ -77,9 +77,9 @@ public class CustomAdapter extends BaseAdapter implements View.OnClickListener
 
             /****** View Holder Object to contain tabitem.xml file elements ******/
             holder = new ViewHolder();
-            holder.text = (TextView) vi.findViewById(R.id.text);
-            holder.text1=(TextView)vi.findViewById(R.id.text1);
-            holder.text2=(TextView)vi.findViewById(R.id.text2);
+            holder.name = (TextView) vi.findViewById(R.id.tripName);
+            holder.time =(TextView)vi.findViewById(R.id.tripTime);
+            holder.distance =(TextView)vi.findViewById(R.id.tripDistance);
             holder.image=(ImageView)vi.findViewById(R.id.image);
 
             /************  Set holder with LayoutInflater ************/
@@ -90,7 +90,7 @@ public class CustomAdapter extends BaseAdapter implements View.OnClickListener
 
         if(data.size()<=0)
         {
-            holder.text.setText("No Data");
+            holder.name.setText("No Data");
         }
         else
         {
@@ -100,9 +100,9 @@ public class CustomAdapter extends BaseAdapter implements View.OnClickListener
 
             /************  Set Model values in Holder elements ***********/
 
-            holder.text.setText(tempValues.getName());
-            holder.text1.setText(tempValues.getTripTime());
-            holder.text2.setText(tempValues.getTripDistance());
+            holder.name.setText(tempValues.getName());
+            holder.time.setText(tempValues.getTripTime());
+            holder.distance.setText(tempValues.getTripDistance());
             holder.image.setImageResource(
                     res.getIdentifier("com.androidexample.customlistview:drawable/"+tempValues.getTripDistance(),null,null));
 

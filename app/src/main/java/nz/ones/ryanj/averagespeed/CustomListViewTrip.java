@@ -1,6 +1,5 @@
 package nz.ones.ryanj.averagespeed;
 
-import android.app.Activity;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -58,7 +57,7 @@ public class CustomListViewTrip extends AppCompatActivity{
     {
         d(DEBUG_TAG, "Refreshing");
 
-        /******** Take some data in Arraylist ( CustomListViewValuesArr ) ***********/
+        /******** Take some data in Array list ********/
         Resources res = getResources();
         list = (ListView)findViewById(R.id.tripList);
 
@@ -68,7 +67,7 @@ public class CustomListViewTrip extends AppCompatActivity{
         list.deferNotifyDataSetChanged();
     }
 
-    /*****************  This function used by adapter ****************/
+    /********  This function used by adapter ********/
     public void onItemClick(int mPosition)
     {
         ListTrip tempValues = (ListTrip) CustomListViewValuesArr.get(mPosition);

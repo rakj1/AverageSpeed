@@ -12,18 +12,19 @@
         android:layout_alignParentTop="true"
         android:id="@+id/frameLayout">
 
-    <ListView
-        android:id="@+id/tripList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"/>
+        <ListView
+            android:id="@+id/tripList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
 
-    <android.support.design.widget.FloatingActionButton android:id="@+id/floatingAdd"
-        android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:layout_gravity="right|bottom" android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_input_add"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"/>
+        <android.support.design.widget.FloatingActionButton android:id="@+id/floatingAdd"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom" android:layout_margin="@dimen/fab_margin"
+            android:src="@android:drawable/ic_input_add"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"/>
 
     </FrameLayout>
+
 </RelativeLayout>
