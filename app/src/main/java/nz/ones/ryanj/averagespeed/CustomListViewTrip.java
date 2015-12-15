@@ -9,6 +9,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import static android.util.Log.d;
 
@@ -22,7 +23,7 @@ public class CustomListViewTrip extends AppCompatActivity{
     ListView list;
     CustomAdapter adapter;
     public CustomListViewTrip CustomListView = null;
-    public  ArrayList<ListTrip> CustomListViewValuesArr = new ArrayList<>();
+    public  ArrayList<Trip> CustomListViewValuesArr = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +40,16 @@ public class CustomListViewTrip extends AppCompatActivity{
 
                 d(DEBUG_TAG, "Add button clicked");
 
-                ListTrip trip = new ListTrip();
-                trip.setName("Trip");
-                trip.setTripDistance("Distance");
-                trip.setTripTime("Time");
+                Calendar c = Calendar.getInstance();
+                Point p = new Point(c.getTime(), 1343.6456, 4326.432);
+                Trip trip = new Trip("Trip", p);
+
+                c = Calendar.getInstance();
+                trip.addPoint(new Point(c.getTime(), 1345.6456, 4328.432));
+
+                c = Calendar.getInstance();
+                trip.endTrip(new Point(c.getTime(), 1349.6456, 4329.432));
+
                 CustomListViewValuesArr.add(trip);
 
                 refresh();
@@ -70,9 +77,9 @@ public class CustomListViewTrip extends AppCompatActivity{
     /********  This function used by adapter ********/
     public void onItemClick(int mPosition)
     {
-        ListTrip tempValues = (ListTrip) CustomListViewValuesArr.get(mPosition);
+        Trip tempValues = CustomListViewValuesArr.get(mPosition);
 
         // SHOW ALERT
-        Toast.makeText(CustomListView, tempValues.getName() + " Image:"+tempValues.getTripDistance()+"Url:"+tempValues.getTripTime(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(CustomListView, tempValues.Name() + " Distance: "+tempValues.Distance()+"Average Speed: "+tempValues.AverageSpeed(),Toast.LENGTH_SHORT).show();
     }
 }

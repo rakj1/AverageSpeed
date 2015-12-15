@@ -15,7 +15,7 @@ public class Trip
     private static String Distance;
     private static String AverageSpeed;
 
-    private Trip(String Name, Point StartingPoint)
+    public Trip(String Name, Point StartingPoint)
     {
         this.Name = Name;
         this.StartTime = StartingPoint.Time();

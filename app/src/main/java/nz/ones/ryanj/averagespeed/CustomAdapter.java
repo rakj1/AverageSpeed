@@ -23,7 +23,7 @@ public class CustomAdapter extends BaseAdapter implements View.OnClickListener
     private ArrayList data;
     private static LayoutInflater inflater=null;
     public Resources res;
-    ListTrip tempValues=null;
+    Trip tempValues = null;
     int i=0;
 
     /*************  CustomAdapter Constructor *****************/
@@ -50,7 +50,6 @@ public class CustomAdapter extends BaseAdapter implements View.OnClickListener
     public Object getItem(int position) {
         return position;
     }
-
     public long getItemId(int position) {
         return position;
     }
@@ -96,15 +95,14 @@ public class CustomAdapter extends BaseAdapter implements View.OnClickListener
         {
             /***** Get each Model object from Arraylist ********/
             tempValues=null;
-            tempValues = (ListTrip) data.get( position );
+            tempValues = (Trip) data.get( position );
 
             /************  Set Model values in Holder elements ***********/
-
-            holder.name.setText(tempValues.getName());
-            holder.time.setText(tempValues.getTripTime());
-            holder.distance.setText(tempValues.getTripDistance());
+            holder.name.setText(tempValues.Name());
+            holder.time.setText(tempValues.AverageSpeed());
+            holder.distance.setText(tempValues.Distance());
             holder.image.setImageResource(
-                    res.getIdentifier("com.androidexample.customlistview:drawable/"+tempValues.getTripDistance(),null,null));
+                    res.getIdentifier("com.androidexample.customlistview:drawable/"+tempValues.Distance(),null,null));
 
             /******** Set Item Click Listner for LayoutInflater for each row *******/
             vi.setOnClickListener(new OnItemClickListener( position ));
