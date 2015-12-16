@@ -13,10 +13,12 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import nz.ones.ryanj.averagespeed.Activity.ActivityCustomListViewTrip;
+
 /**
  * Created by Ryan Jones on 13/12/2015.
  */
-public class CustomAdapter extends BaseAdapter implements View.OnClickListener
+public class AdapterCustom extends BaseAdapter implements View.OnClickListener
 {
     /*********** Declare Used Variables *********/
     private Activity activity;
@@ -26,8 +28,8 @@ public class CustomAdapter extends BaseAdapter implements View.OnClickListener
     Trip tempValues = null;
     int i=0;
 
-    /*************  CustomAdapter Constructor *****************/
-    public CustomAdapter(Activity a, ArrayList d,Resources resLocal) {
+    /*************  AdapterCustom Constructor *****************/
+    public AdapterCustom(Activity a, ArrayList d, Resources resLocal) {
 
         /********** Take passed values **********/
         activity = a;
@@ -69,7 +71,7 @@ public class CustomAdapter extends BaseAdapter implements View.OnClickListener
         View vi = convertView;
         ViewHolder holder;
 
-        if(convertView==null){
+        if(convertView == null){
 
             /****** Inflate tabitem.xml file for each row ( Defined below ) *******/
             vi = inflater.inflate(R.layout.tabitem, null);
@@ -112,7 +114,7 @@ public class CustomAdapter extends BaseAdapter implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
-        Log.v("CustomAdapter", "=====Row button clicked=====");
+        Log.v("AdapterCustom", "=====Row button clicked=====");
     }
 
     /********* Called when Item click in ListView ************/
@@ -126,9 +128,9 @@ public class CustomAdapter extends BaseAdapter implements View.OnClickListener
         @Override
         public void onClick(View arg0) {
 
-            CustomListViewTrip sct = (CustomListViewTrip)activity;
+            ActivityCustomListViewTrip sct = (ActivityCustomListViewTrip)activity;
 
-            /****  Call  onItemClick Method inside CustomListViewTrip Class ( See Below )****/
+            /****  Call  onItemClick Method inside ActivityCustomListViewTrip Class ( See Below )****/
             sct.onItemClick(mPosition);
         }
     }

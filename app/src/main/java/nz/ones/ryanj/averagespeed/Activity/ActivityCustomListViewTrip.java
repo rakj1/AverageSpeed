@@ -1,29 +1,35 @@
-package nz.ones.ryanj.averagespeed;
+package nz.ones.ryanj.averagespeed.Activity;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
+
+import nz.ones.ryanj.averagespeed.AdapterCustom;
+import nz.ones.ryanj.averagespeed.AllTrips;
+import nz.ones.ryanj.averagespeed.Point;
+import nz.ones.ryanj.averagespeed.R;
+import nz.ones.ryanj.averagespeed.Trip;
 
 import static android.util.Log.d;
 
 /**
  * Created by Ryan Jones on 14/12/2015.
  */
-public class CustomListViewTrip extends AppCompatActivity{
+public class ActivityCustomListViewTrip extends AppCompatActivity{
 
     private final String DEBUG_TAG =  "AverageSpeed." + getClass().getCanonicalName();
 
     ListView list;
-    CustomAdapter adapter;
-    public CustomListViewTrip CustomListView = null;
-    public  ArrayList<Trip> CustomListViewValuesArr = new ArrayList<>();
+    AdapterCustom adapter;
+    public ActivityCustomListViewTrip CustomListView = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +56,7 @@ public class CustomListViewTrip extends AppCompatActivity{
                 c = Calendar.getInstance();
                 trip.endTrip(new Point(c.getTime(), 1349.6456, 4329.432));
 
-                CustomListViewValuesArr.add(trip);
+                AllTrips.add(trip);
 
                 refresh();
             }
@@ -69,7 +75,7 @@ public class CustomListViewTrip extends AppCompatActivity{
         list = (ListView)findViewById(R.id.tripList);
 
         /******** Create Custom Adapter *********/
-        adapter = new CustomAdapter( CustomListView, CustomListViewValuesArr,res );
+        adapter = new AdapterCustom( CustomListView, AllTrips.getTrips(),res );
         list.setAdapter(adapter);
         list.deferNotifyDataSetChanged();
     }
@@ -77,9 +83,10 @@ public class CustomListViewTrip extends AppCompatActivity{
     /********  This function used by adapter ********/
     public void onItemClick(int mPosition)
     {
-        Trip tempValues = CustomListViewValuesArr.get(mPosition);
+        Trip tempTrip = AllTrips.get(mPosition);
 
-        // SHOW ALERT
-        Toast.makeText(CustomListView, tempValues.Name() + " Distance: "+tempValues.Distance()+"Average Speed: "+tempValues.AverageSpeed(),Toast.LENGTH_SHORT).show();
+        d(DEBUG_TAG, "Opening Trip: " + tempTrip.Name());
+        Intent i = new Intent(getBaseContext(), ActivityDisplayTrip.class);
+        i.putExtra("Trip", (Serializable) tempTrip);
     }
 }
