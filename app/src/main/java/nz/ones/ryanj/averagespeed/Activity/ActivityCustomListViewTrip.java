@@ -8,15 +8,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ListView;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 import nz.ones.ryanj.averagespeed.AdapterCustom;
-import nz.ones.ryanj.averagespeed.AllTrips;
-import nz.ones.ryanj.averagespeed.Point;
+import nz.ones.ryanj.averagespeed.DataObjects.Point;
+import nz.ones.ryanj.averagespeed.DatabaseHandler;
 import nz.ones.ryanj.averagespeed.R;
-import nz.ones.ryanj.averagespeed.Trip;
+import nz.ones.ryanj.averagespeed.DataObjects.Trip;
 
 import static android.util.Log.d;
 
@@ -30,12 +29,15 @@ public class ActivityCustomListViewTrip extends AppCompatActivity{
     ListView list;
     AdapterCustom adapter;
     public ActivityCustomListViewTrip CustomListView = null;
+    DatabaseHandler db;
+    int count = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_list_view_trip);
+        db = new DatabaseHandler(getBaseContext());
 
         /********Boring UI binding********/
         /*Floating Button*/
@@ -43,20 +45,12 @@ public class ActivityCustomListViewTrip extends AppCompatActivity{
         floatingAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 d(DEBUG_TAG, "Add button clicked");
 
                 Calendar c = Calendar.getInstance();
                 Point p = new Point(c.getTime(), 1343.6456, 4326.432);
-                Trip trip = new Trip("Trip", p);
-
-                c = Calendar.getInstance();
-                trip.addPoint(new Point(c.getTime(), 1345.6456, 4328.432));
-
-                c = Calendar.getInstance();
-                trip.endTrip(new Point(c.getTime(), 1349.6456, 4329.432));
-
-                AllTrips.add(trip);
+                Trip trip = new Trip("Trip" + count++, p);
+                db.addTrip(trip);
 
                 refresh();
             }
@@ -75,18 +69,22 @@ public class ActivityCustomListViewTrip extends AppCompatActivity{
         list = (ListView)findViewById(R.id.tripList);
 
         /******** Create Custom Adapter *********/
-        adapter = new AdapterCustom( CustomListView, AllTrips.getTrips(),res );
+        d(DEBUG_TAG, "Fetching " + db.getTripCount() + " trips");
+        ArrayList<Trip> trips = db.getAllTrips();
+        adapter = new AdapterCustom(CustomListView, trips, res);
         list.setAdapter(adapter);
         list.deferNotifyDataSetChanged();
+
     }
 
     /********  This function used by adapter ********/
     public void onItemClick(int mPosition)
     {
-        Trip tempTrip = AllTrips.get(mPosition);
+        Trip tempTrip = db.getTrip(mPosition);
 
-        d(DEBUG_TAG, "Opening Trip: " + tempTrip.Name());
+        d(DEBUG_TAG, "Opening Trip:" + mPosition + " " + tempTrip.Name());
         Intent i = new Intent(getBaseContext(), ActivityDisplayTrip.class);
-        i.putExtra("Trip", (Serializable) tempTrip);
+        i.putExtra("TRIP_ID", mPosition);
+        startActivity(i);
     }
 }

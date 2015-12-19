@@ -14,6 +14,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import nz.ones.ryanj.averagespeed.Activity.ActivityCustomListViewTrip;
+import nz.ones.ryanj.averagespeed.DataObjects.Trip;
 
 /**
  * Created by Ryan Jones on 13/12/2015.
