@@ -6,17 +6,22 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
 
+import nz.ones.ryanj.averagespeed.DataObjects.Point;
 import nz.ones.ryanj.averagespeed.DataObjects.Trip;
+
+import static android.util.Log.d;
 
 /**
  * Created by Ryan Jones on 20/12/2015.
  */
 public class DatabaseHandler extends SQLiteOpenHelper
 {
+    private final String DEBUG_TAG =  "AverageSpeed." + getClass().getCanonicalName();
+
     private static final int DATABASE_VERSION = 1;
 
     private static final String DATABASE_NAME = "tripAverage";
@@ -160,8 +165,91 @@ public class DatabaseHandler extends SQLiteOpenHelper
     {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_TRIP, TRIP_ID + " =?",
-                new String[] {(String.valueOf(t.ID()))});
+                new String[]{(String.valueOf(t.ID()))});
         db.close();
+    }
+
+    /***** Points DB Operations *****/
+    public void addPoint(Point p)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss.sss");
+
+        ContentValues values = new ContentValues();
+        values.put(POINT_TIME, dateFormat.format(p.Time()));
+        values.put(POINT_LAT, p.Latitude());
+        values.put(POINT_LONG, p.Longitude());
+
+        db.insert(TABLE_POINT, null, values);
+        db.close();
+    }
+    public Point getPoint(int id)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss.sss");
+
+        Cursor cursor = db.query(TABLE_POINT, new String[]{POINT_ID, POINT_TIME, POINT_LAT,
+                        POINT_LONG}, POINT_ID + "=?",
+                new String[]{String.valueOf(id)}, null, null, null);
+
+        if(cursor != null)
+            cursor.moveToFirst();
+
+        Point p = null;
+        try {
+            p = new Point(Integer.parseInt(cursor.getString(0)), dateFormat.parse(cursor.getString(1)), Double.parseDouble(cursor.getString(2))
+                    , Double.parseDouble(cursor.getString(3)));
+        }
+        catch (ParseException ex)
+        {
+            d(DEBUG_TAG, ex.getMessage());
+        }
+        return p;
+    }
+    public ArrayList<Point> getAllPoints(int tripId)
+    {
+        ArrayList<Point> pointList = new ArrayList<>();
+        String selectQuery = "SELECT * FROM " + TABLE_POINT;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss.sss");
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if(cursor.moveToFirst())
+        {
+            do
+            {
+                try {
+                    Point p = new Point(Integer.parseInt(cursor.getString(0)), dateFormat.parse(cursor.getString(1)), Double.parseDouble(cursor.getString(2))
+                            , Double.parseDouble(cursor.getString(3)));
+                    pointList.add(p);
+                }
+                catch (ParseException ex)
+                {
+                    d(DEBUG_TAG, ex.getMessage());
+                }
+            } while (cursor.moveToNext());
+        }
+
+        return pointList;
+    }
+    public int getPointCount(int tripId)
+    {
+        String countQuery = "SELECT * FROM " + TABLE_POINT;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        int c = cursor.getCount();
+        cursor.close();
+
+        return c;
+    }
+    public int updatePoint(Point p)
+    {
+        return -1;
+    }
+    public void deletePoint(Point p)
+    {
+
     }
 
 }

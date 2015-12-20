@@ -1,9 +1,5 @@
 package nz.ones.ryanj.averagespeed.DataObjects;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,7 +17,6 @@ public class Trip
     private String _name;
     private Date _startTime;
     private Date _endTime;
-    private PointList Points;
     private String _averageSpeed;
     private String _distance;
 
@@ -29,8 +24,7 @@ public class Trip
     {
         this._name = Name;
         this._startTime = StartingPoint.Time();
-        Points = new PointList();
-        Points.add(StartingPoint);
+        //Points.add(StartingPoint);
     }
 
     public Trip(int ID ,String Name, Point StartingPoint)
@@ -38,8 +32,7 @@ public class Trip
         this._id = ID;
         this._name = Name;
         this._startTime = StartingPoint.Time();
-        Points = new PointList();
-        Points.add(StartingPoint);
+        //Points.add(StartingPoint);
     }
 
     public Trip(int ID, String Name, String StartTime, String EndTime, String AverageSpeed, String Distance)
@@ -76,13 +69,13 @@ public class Trip
     /**Setter Methods**/
     public void endTrip(Point endingPoint)
     {
-        Points.add(endingPoint);
+        //Points.add(endingPoint);
         _endTime = endingPoint.Time();
     }
 
     public void addPoint(Point point)
     {
-        Points.add(point);
+        //Points.add(point);
     }
 
 }
