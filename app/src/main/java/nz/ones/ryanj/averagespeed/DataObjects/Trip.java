@@ -3,6 +3,7 @@ package nz.ones.ryanj.averagespeed.DataObjects;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -43,56 +44,19 @@ public class Trip
 
     public Trip(int ID, String Name, String StartTime, String EndTime, String AverageSpeed, String Distance)
     {
-        this._id = ID;
-        this._name = Name;
-
-        this._averageSpeed = AverageSpeed;
-        this._distance = Distance;
-    }
-
-    public Trip(String json)
-    {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
         try {
-            // Parse the string into a JSON object
-            JSONObject obj = new JSONObject(json);
-
-            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
-
-            d(DEBUG_TAG, "Getting stored prefs");
-            d(DEBUG_TAG, obj.toString());
-            // Extract the data of the trip from the JSON object
-            _name = obj.getString("name");
-            _startTime = format.parse(obj.getString("startTime"));
-            _endTime = format.parse(obj.getString("endTime"));
-            //_distance = obj.getString("_distance");
-            //_averageSpeed = obj.getString("averageSpeed");
-            Points = (PointList)obj.get("points");
-        } catch (JSONException | ParseException e) {
-            // If any fields or JSON is invalid print the stack trace and throw a new Illegal arg exception
-            d(DEBUG_TAG, e.toString());
-            e.printStackTrace();
-            throw new IllegalArgumentException("Invalid serialised string, can't create trip ...");
+            this._id = ID;
+            this._name = Name;
+            this._startTime = dateFormat.parse(StartTime);
+            this._endTime = dateFormat.parse(EndTime);
+            this._averageSpeed = AverageSpeed;
+            this._distance = Distance;
         }
-    }
-
-    public String toJSONString() {
-        JSONObject obj = new JSONObject();
-
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
-
-        try {
-            obj.put("name", _name);
-            obj.put("startTime", format.format(_startTime));
-            obj.put("endTime", format.format(_endTime));
-            //obj.put("_distance",_distance);
-            //obj.put("averageSpeed", _averageSpeed);
-        } catch (JSONException e) {
-            e.printStackTrace();
-            d(DEBUG_TAG, "Error occurred while constructing serialised string...");
+        catch (ParseException ex)
+        {
+            d(DEBUG_TAG, ex.getMessage());
         }
-        String t = obj.toString().substring(0, obj.toString().length()-1) + ",\"points\":" +  Points.toString() + "}";
-        //d(DEBUG_TAG, t);
-        return t ;
     }
 
     /**Getter methods**/

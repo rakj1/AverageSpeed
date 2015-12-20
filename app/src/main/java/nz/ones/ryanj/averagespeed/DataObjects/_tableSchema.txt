@@ -2,7 +2,7 @@ Trip
 +---------------+-------+-------+
 | Field         | Type  | Key   |
 +---------------+-------+-------+
-| TripId        | int   | Pri   |
+| TripId        | int   | PK    |
 | Name          | Text  | NN    |
 | StartTime     | Text  | NN    |
 | EndTime       | Text  |       |
@@ -14,7 +14,7 @@ Point
 +---------------+-------+-------+
 | Field         | Type  | Key   |
 +---------------+-------+-------+
-| PointID       | int   | Pri   |
+| PointID       | int   | PK    |
 | Time          | Text  | NN    |
 | Lat           | Real  | NN    |
 | Long          | Real  | NN    |
@@ -24,6 +24,7 @@ TripPoints
 +---------------+-------+-------+
 | Field         | Type  | Key   |
 +---------------+-------+-------+
-| PointID       | int   | P/FK  |
+| id            | int   | PK    |
+| PointID       | int   | FK    |
 | TripID        | int   | FK    |
 +---------------+-------+-------+
