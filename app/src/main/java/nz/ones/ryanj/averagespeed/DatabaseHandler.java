@@ -245,11 +245,23 @@ public class DatabaseHandler extends SQLiteOpenHelper
     }
     public int updatePoint(Point p)
     {
-        return -1;
+        SQLiteDatabase db = this.getWritableDatabase();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+
+        ContentValues values = new ContentValues();
+        values.put(POINT_TIME, dateFormat.format(p.Time()));
+        values.put(POINT_LAT, p.Latitude());
+        values.put(POINT_LONG, p.Longitude());
+
+        return db.update(TABLE_POINT, values, POINT_ID + "=?",
+                new String[] {(String.valueOf(p.ID()))});
     }
     public void deletePoint(Point p)
     {
-
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_POINT, POINT_ID+ " =?",
+                new String[]{(String.valueOf(p.ID()))});
+        db.close();
     }
 
 }

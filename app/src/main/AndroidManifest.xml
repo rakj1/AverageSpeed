@@ -19,6 +19,15 @@
         </activity>
         <activity android:name=".Activity.ActivityDisplayTrip" >
         </activity>
+        <activity
+            android:name=".Activity.ActivityNewTrip"
+            android:label="@string/title_activity_activity_new_trip"
+            android:parentActivityName=".Activity.ActivityCustomListViewTrip"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="nz.ones.ryanj.averagespeed.Activity.ActivityCustomListViewTrip" />
+        </activity>
     </application>
 
 </manifest>

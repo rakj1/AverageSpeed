@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import nz.ones.ryanj.averagespeed.DatabaseHandler;
+
 import static android.util.Log.d;
 
 /**
