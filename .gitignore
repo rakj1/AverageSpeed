@@ -13,6 +13,11 @@
 # Java class files
 *.class
 
+#Gradle Files
+.gradle/
+*.gradle
+build/
+
 # Generated files
 bin/
 gen/
