@@ -28,7 +28,6 @@ public class DatabaseHandler extends SQLiteOpenHelper
     // Table Name
     private static final String TABLE_TRIP = "trip";
     private static final String TABLE_POINT = "point";
-    private static final String TABLE_TRIP_POINTS = "trip_point";
     // Trip Table Columns
     private static final String TRIP_ID = "id";
     private static final String TRIP_NAME = "name";
@@ -38,13 +37,12 @@ public class DatabaseHandler extends SQLiteOpenHelper
     private static final String TRIP_DISTANCE = "distance";
     // Point Table Names
     private static final String POINT_ID = "id";
+    private static final String POINT_TRIP_ID = "tripid";
     private static final String POINT_TIME = "time";
     private static final String POINT_LAT = "lat";
     private static final String POINT_LONG = "long";
     // Trip Point Table Names
-    private static final String TRIP_POINT_ID = "id";
-    private static final String TRIP_POINT_POINT_ID = "pointid";
-    private static final String TRIP_POINT_TRIP_ID = "tripid";
+
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -63,18 +61,13 @@ public class DatabaseHandler extends SQLiteOpenHelper
 
         String CREATE_POINT_TABLE = "CREATE TABLE " + TABLE_POINT + "("
                 + POINT_ID + " INTEGER PRIMARY KEY, "
+                + POINT_TRIP_ID + "INTEGER FOREIGN KEY, "
                 + POINT_TIME + " TEXT NOT NULL, "
                 + POINT_LAT + " REAL NOT NULL, "
                 + POINT_LONG + " REAL NOT NULL" + ")";
 
-        String CREATE_TRIP_POINT_TABLE = "CREATE TABLE " + TABLE_TRIP_POINTS + "("
-                + TRIP_POINT_ID + " INTEGER PRIMARY KEY, "
-                + TRIP_POINT_POINT_ID + " INTEGER FOREIGN KEY, "
-                + TRIP_POINT_TRIP_ID + "INTEGER FOREIGN KEY" + ")";
-
         db.execSQL(CREATE_TRIP_TABLE);
         db.execSQL(CREATE_POINT_TABLE);
-        db.execSQL(CREATE_TRIP_POINT_TABLE);
     }
 
     @Override
@@ -82,7 +75,6 @@ public class DatabaseHandler extends SQLiteOpenHelper
         // Drop older table if existed
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_TRIP);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_POINT);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_TRIP_POINTS);
 
         // Create tables again
         onCreate(db);

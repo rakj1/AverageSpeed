@@ -15,16 +15,8 @@ Point
 | Field         | Type  | Key   |
 +---------------+-------+-------+
 | PointID       | int   | PK    |
+| TripID        | int   | FK
 | Time          | Text  | NN    |
 | Lat           | Real  | NN    |
 | Long          | Real  | NN    |
-+---------------+-------+-------+
-
-TripPoints
-+---------------+-------+-------+
-| Field         | Type  | Key   |
-+---------------+-------+-------+
-| id            | int   | PK    |
-| PointID       | int   | FK    |
-| TripID        | int   | FK    |
 +---------------+-------+-------+

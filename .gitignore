@@ -13,8 +13,8 @@
 # Java class files
 *.class
 
-#Gradle Files
-.gradle/
+# Gradle Files
+gradle/
 *.gradle
 build/
 
