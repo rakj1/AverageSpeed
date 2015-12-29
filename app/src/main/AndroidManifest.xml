@@ -17,6 +17,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activity.ActivityDisplayTrip" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="nz.ones.ryanj.averagespeed.Activity.ActivityCustomListViewTrip" />
         </activity>
         <activity
             android:name=".Activity.ActivityNewTrip"
