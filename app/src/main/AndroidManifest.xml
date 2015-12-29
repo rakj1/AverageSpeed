@@ -16,7 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.ActivityDisplayTrip" >
+        <activity android:name=".Activity.ActivityDisplayTrip"
+            android:label="Trip Overview" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="nz.ones.ryanj.averagespeed.Activity.ActivityCustomListViewTrip" />
