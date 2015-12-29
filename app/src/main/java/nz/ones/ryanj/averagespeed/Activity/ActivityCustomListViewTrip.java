@@ -29,6 +29,7 @@ public class ActivityCustomListViewTrip extends AppCompatActivity{
     ListView list;
     AdapterCustom adapter;
     public ActivityCustomListViewTrip CustomListView = null;
+    ArrayList<Trip> trips = null;
     DatabaseHandler db;
     int count = 1;
 
@@ -66,7 +67,7 @@ public class ActivityCustomListViewTrip extends AppCompatActivity{
 
         /******** Create Custom Adapter *********/
         d(DEBUG_TAG, "Fetching " + db.getTripCount() + " trips");
-        ArrayList<Trip> trips = db.getAllTrips();
+        trips = db.getAllTrips();
         adapter = new AdapterCustom(CustomListView, trips, res);
         list.setAdapter(adapter);
         list.deferNotifyDataSetChanged();
@@ -76,11 +77,11 @@ public class ActivityCustomListViewTrip extends AppCompatActivity{
     /********  This function used by adapter ********/
     public void onItemClick(int mPosition)
     {
-        Trip tempTrip = db.getTrip(mPosition);
+        Trip tempTrip = trips.get(mPosition);
 
         d(DEBUG_TAG, "Opening Trip:" + mPosition + " " + tempTrip.Name());
         Intent i = new Intent(getBaseContext(), ActivityDisplayTrip.class);
-        i.putExtra("TRIP_ID", mPosition);
+        i.putExtra("TRIP_ID", tempTrip.ID());
         startActivity(i);
     }
 }
