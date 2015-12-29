@@ -201,7 +201,7 @@ public class DatabaseHandler extends SQLiteOpenHelper
     public ArrayList<Point> getAllPoints(int tripId)
     {
         ArrayList<Point> pointList = new ArrayList<>();
-        String selectQuery = "SELECT * FROM " + TABLE_POINT;
+        String selectQuery = "SELECT * FROM " + TABLE_POINT + "WHERE " + POINT_TRIP_ID + " = " + tripId;
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss.sss");
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -227,7 +227,7 @@ public class DatabaseHandler extends SQLiteOpenHelper
     }
     public int getPointCount(int tripId)
     {
-        String countQuery = "SELECT * FROM " + TABLE_POINT;
+        String countQuery = "SELECT * FROM " + TABLE_POINT+ "WHERE " + POINT_TRIP_ID + " = " + tripId;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int c = cursor.getCount();
