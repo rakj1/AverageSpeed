@@ -47,12 +47,8 @@ public class ActivityCustomListViewTrip extends AppCompatActivity{
             public void onClick(View v) {
                 d(DEBUG_TAG, "Add button clicked");
 
-                Calendar c = Calendar.getInstance();
-                Point p = new Point(c.getTime(), 1343.6456, 4326.432);
-                Trip trip = new Trip("Trip" + count++, p);
-                db.addTrip(trip);
-
-                refresh();
+                Intent i = new Intent(getBaseContext(), ActivityNewTrip.class);
+                startActivity(i);
             }
         });
 

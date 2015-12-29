@@ -44,7 +44,8 @@ public class Trip
             this._id = ID;
             this._name = Name;
             this._startTime = dateFormat.parse(StartTime);
-            this._endTime = dateFormat.parse(EndTime);
+            if (EndTime != null)
+                this._endTime = dateFormat.parse(EndTime);
             this._averageSpeed = AverageSpeed;
             this._distance = Distance;
         }

@@ -61,7 +61,7 @@ public class DatabaseHandler extends SQLiteOpenHelper
 
         String CREATE_POINT_TABLE = "CREATE TABLE " + TABLE_POINT + "("
                 + POINT_ID + " INTEGER PRIMARY KEY, "
-                + POINT_TRIP_ID + "INTEGER FOREIGN KEY, "
+                + POINT_TRIP_ID + " INTEGER, "
                 + POINT_TIME + " TEXT NOT NULL, "
                 + POINT_LAT + " REAL NOT NULL, "
                 + POINT_LONG + " REAL NOT NULL" + ")";
@@ -117,14 +117,11 @@ public class DatabaseHandler extends SQLiteOpenHelper
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         if(cursor.moveToFirst())
-        {
-            do
-            {
+            do {
                 Trip t = new Trip(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2), cursor.getString(3)
                         , cursor.getString(4), cursor.getString(5));
                 tripList.add(t);
             } while (cursor.moveToNext());
-        }
 
         return tripList;
     }
@@ -201,7 +198,7 @@ public class DatabaseHandler extends SQLiteOpenHelper
     public ArrayList<Point> getAllPoints(int tripId)
     {
         ArrayList<Point> pointList = new ArrayList<>();
-        String selectQuery = "SELECT * FROM " + TABLE_POINT + "WHERE " + POINT_TRIP_ID + " = " + tripId;
+        String selectQuery = "SELECT * FROM " + TABLE_POINT + " WHERE " + POINT_TRIP_ID + " = " + tripId;
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss.sss");
 
         SQLiteDatabase db = this.getWritableDatabase();
