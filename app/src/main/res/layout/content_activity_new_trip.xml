@@ -10,4 +10,16 @@
     tools:showIn="@layout/activity_activity_new_trip"
     tools:context="nz.ones.ryanj.averagespeed.Activity.ActivityNewTrip">
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start Trip"
+        android:id="@+id/buttonStartTrip"
+        android:layout_marginBottom="57dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
 </RelativeLayout>
