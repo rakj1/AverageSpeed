@@ -22,6 +22,7 @@ import java.util.Date;
 
 import nz.ones.ryanj.averagespeed.DataObjects.Point;
 import nz.ones.ryanj.averagespeed.DataObjects.Trip;
+import nz.ones.ryanj.averagespeed.DatabaseHandler;
 import nz.ones.ryanj.averagespeed.R;
 
 public class ActivityNewTrip extends AppCompatActivity {
@@ -30,6 +31,8 @@ public class ActivityNewTrip extends AppCompatActivity {
 
     private final static int INTERVAL = 1000 * 20;     //20 Seconds
     private static final int REQUEST_GPS = 0;
+    final Handler h = new Handler();
+    private long tripId;
     private View mLayout;
 
     @Override
@@ -45,25 +48,32 @@ public class ActivityNewTrip extends AppCompatActivity {
         Button endButton = (Button) findViewById(R.id.buttonEndTrip);
         endButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-
+                Log.d(DEBUG_TAG, "Ending trips");
+                h.removeCallbacksAndMessages(null);
+                finish();
             }
         });
 
         //Create a new trip and add to the db getting the ID of the trip
-        String tripName = "tripX";
-
+        String tripName = "trip: " + Calendar.getInstance().getTime().toString();
+        Log.d(DEBUG_TAG, "Starting trip \"" + tripName + "\" and adding to Database");
         Point startingPoint = getCurrentPoint();
         Trip currentTrip = new Trip(tripName, startingPoint);
+        // Final may break this
+        final DatabaseHandler db = new DatabaseHandler(getBaseContext());
+        tripId = db.addTrip(currentTrip);
 
-        final Handler h = new Handler();
         h.postDelayed(new Runnable() {
             @Override
             public void run() {
                 //Get co-ordinates and time to add it as a point
                 h.postDelayed(this, INTERVAL);
+
+                Log.d(DEBUG_TAG, "Getting current point and adding to Database");
+                Point p = getCurrentPoint();
+                db.addPoint(new Point(tripId, p.Time(), p.Longitude(), p.Latitude()));
             }
         }, INTERVAL);
-
     }
 
     public Point getCurrentPoint() {
@@ -88,7 +98,7 @@ public class ActivityNewTrip extends AppCompatActivity {
     }
 
     private void requestGPSPermissions(final String permission) {
-        Log.i(DEBUG_TAG, "GPS Permission has not been granted. Requesting permission");
+        Log.d(DEBUG_TAG, "GPS Permission has not been granted. Requesting permission");
 
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, permission)) {
             Snackbar.make(mLayout, "The App needs access to the GPS to get the length of the trip",
@@ -98,8 +108,6 @@ public class ActivityNewTrip extends AppCompatActivity {
                     ActivityCompat.requestPermissions(ActivityNewTrip.this, new String[]{permission}, REQUEST_GPS);
                 }
             }).show();
-
-
 
         } else {
             // Permission has not been granted yet. Request it directly.

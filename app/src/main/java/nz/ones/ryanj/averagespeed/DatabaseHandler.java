@@ -81,7 +81,7 @@ public class DatabaseHandler extends SQLiteOpenHelper
     }
 
     /******** Trip DB Operations ********/
-    public void addTrip(Trip t)
+    public long addTrip(Trip t)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss.sss");
@@ -90,8 +90,9 @@ public class DatabaseHandler extends SQLiteOpenHelper
         values.put(TRIP_NAME, t.Name());
         values.put(TRIP_START_TIME, dateFormat.format(t.StartTime()));
 
-        db.insert(TABLE_TRIP, null, values);
+        long id = db.insert(TABLE_TRIP, null, values);
         db.close();
+        return id;
     }
     public Trip getTrip(int id)
     {
@@ -165,6 +166,7 @@ public class DatabaseHandler extends SQLiteOpenHelper
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss.sss");
 
         ContentValues values = new ContentValues();
+        values.put(POINT_TRIP_ID, p.ID());
         values.put(POINT_TIME, dateFormat.format(p.Time()));
         values.put(POINT_LAT, p.Latitude());
         values.put(POINT_LONG, p.Longitude());
@@ -172,7 +174,7 @@ public class DatabaseHandler extends SQLiteOpenHelper
         db.insert(TABLE_POINT, null, values);
         db.close();
     }
-    public Point getPoint(int id)
+    public Point getPoint(long id)
     {
         SQLiteDatabase db = this.getReadableDatabase();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss.sss");
@@ -186,7 +188,7 @@ public class DatabaseHandler extends SQLiteOpenHelper
 
         Point p = null;
         try {
-            p = new Point(Integer.parseInt(cursor.getString(0)), dateFormat.parse(cursor.getString(1)), Double.parseDouble(cursor.getString(2))
+            p = new Point(Long.parseLong(cursor.getString(0)), dateFormat.parse(cursor.getString(1)), Double.parseDouble(cursor.getString(2))
                     , Double.parseDouble(cursor.getString(3)));
         }
         catch (ParseException ex)

@@ -11,7 +11,7 @@ public class Point
 {
     private final String DEBUG_TAG =  "AverageSpeed." + getClass().getCanonicalName();
 
-    private int _id;
+    private long _id;
     private Date _time;
     private Double _latitude;
     private Double _longitude;
@@ -23,7 +23,7 @@ public class Point
         this._longitude = Long;
     }
 
-    public Point(int ID, Date Time, Double Long, Double Lat)
+    public Point(long ID, Date Time, Double Long, Double Lat)
     {
         this._id = ID;
         this._time = Time;
@@ -32,7 +32,7 @@ public class Point
     }
 
     /****** Getter methods *****/
-    public int ID() {return _id;}
+    public long ID() {return _id;}
     public Date Time() {return _time;}
     public Double Longitude() {return _longitude;}
     public Double Latitude() {return _latitude;}
