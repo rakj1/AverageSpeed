@@ -2,6 +2,7 @@ package nz.ones.ryanj.averagespeed.Activity;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
@@ -11,6 +12,7 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -52,11 +54,7 @@ public class ActivityNewTrip extends AppCompatActivity {
         endButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 h.removeCallbacksAndMessages(null);
-                Log.d(DEBUG_TAG, "Ending trip. Getting last point and adding to database");
-                Point p = getCurrentPoint();
-                db.addPoint(new Point(tripId, p.Time(), p.Longitude(), p.Latitude()));
-                currentTrip.endTrip(p);
-                finish();
+                endTrip();
             }
         });
 
@@ -84,7 +82,27 @@ public class ActivityNewTrip extends AppCompatActivity {
     public void onBackPressed()
     {
         // Double check the user wants to exit
-        
+        new AlertDialog.Builder(this)
+                .setTitle("End Trip")
+                .setMessage("Do you really want end this trip?")
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        endTrip();
+                    }})
+                .setNegativeButton(android.R.string.no, null).show();
+    }
+
+    public void endTrip()
+    {
+        final DatabaseHandler db = new DatabaseHandler(getBaseContext());
+        Log.d(DEBUG_TAG, "Ending trip. Getting last point and adding to database");
+        Point p = getCurrentPoint();
+        db.addPoint(new Point(tripId, p.Time(), p.Longitude(), p.Latitude()));
+        currentTrip.endTrip(p);
+        db.updateTrip(currentTrip);
+        finish();
     }
 
     public Point getCurrentPoint() {
