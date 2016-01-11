@@ -13,8 +13,8 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start Trip"
-        android:id="@+id/buttonStartTrip"
+        android:text="End Trip"
+        android:id="@+id/buttonEndTrip"
         android:layout_marginBottom="57dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
