@@ -15,7 +15,6 @@
         android:layout_height="wrap_content"
         android:text="End Trip"
         android:id="@+id/buttonEndTrip"
-        android:layout_marginBottom="57dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"

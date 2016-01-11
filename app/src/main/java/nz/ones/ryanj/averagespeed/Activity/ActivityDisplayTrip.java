@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import java.text.Format;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import nz.ones.ryanj.averagespeed.DatabaseHandler;
 import nz.ones.ryanj.averagespeed.R;
@@ -41,18 +43,30 @@ public class ActivityDisplayTrip extends AppCompatActivity {
         Name.setText(thisTrip.Name());
 
         Format dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
-        TextView StartTime = (TextView) findViewById(R.id.textViewStartTime);
-        //StartTime.setText(dateFormat.format(thisTrip.StartTime()));
-        TextView EndTime = (TextView) findViewById(R.id.textViewEndTime);
-        //EndTime.setText(dateFormat.format(thisTrip.EndTime()));
+        TextView viewStartTime = (TextView) findViewById(R.id.textViewStartTime);
+        viewStartTime.setText(dateFormat.format(thisTrip.StartTime()));
+        TextView viewEndTime = (TextView) findViewById(R.id.textViewEndTime);
+        viewEndTime.setText(dateFormat.format(thisTrip.EndTime()));
         TextView TripTime = (TextView) findViewById(R.id.tripTime);
-        //TripTime.setText(TODO);
+        TripTime.setText(getTimeDifference(thisTrip.StartTime(), thisTrip.EndTime()));
 
         TextView AverageSpeed = (TextView) findViewById(R.id.textViewAverage);
         //AverageSpeed.setText(TODO);
         TextView Distance = (TextView) findViewById(R.id.textViewDistance);
         //Distance.setText(TODO);
 
+    }
+
+
+    private String getTimeDifference(Date startTime, Date endTime)
+    {
+        long duration  = endTime.getTime() - startTime.getTime();
+
+        long diffInSeconds = TimeUnit.MILLISECONDS.toSeconds(duration);
+        long diffInMinutes = TimeUnit.MILLISECONDS.toMinutes(duration);
+        long diffInHours = TimeUnit.MILLISECONDS.toHours(duration);
+
+        return diffInHours + ":"+diffInMinutes + ":" + diffInSeconds;
     }
 
     private void end(String errMsg)
@@ -73,7 +87,6 @@ public class ActivityDisplayTrip extends AppCompatActivity {
 
     private void end()
     {
-
         finish();
     }
 

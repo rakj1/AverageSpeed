@@ -32,6 +32,7 @@ public class ActivityNewTrip extends AppCompatActivity {
     private final static int INTERVAL = 1000 * 20;     //20 Seconds
     private static final int REQUEST_GPS = 0;
     final Handler h = new Handler();
+    private Trip currentTrip;
     private long tripId;
     private View mLayout;
 
@@ -42,14 +43,19 @@ public class ActivityNewTrip extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        // Final may break this
+        final DatabaseHandler db = new DatabaseHandler(getBaseContext());
 
         /********Boring UI binding********/
         /*Start Trip Button*/
         Button endButton = (Button) findViewById(R.id.buttonEndTrip);
         endButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                Log.d(DEBUG_TAG, "Ending trips");
                 h.removeCallbacksAndMessages(null);
+                Log.d(DEBUG_TAG, "Ending trip. Getting last point and adding to database");
+                Point p = getCurrentPoint();
+                db.addPoint(new Point(tripId, p.Time(), p.Longitude(), p.Latitude()));
+                currentTrip.endTrip(p);
                 finish();
             }
         });
@@ -58,22 +64,27 @@ public class ActivityNewTrip extends AppCompatActivity {
         String tripName = "trip: " + Calendar.getInstance().getTime().toString();
         Log.d(DEBUG_TAG, "Starting trip \"" + tripName + "\" and adding to Database");
         Point startingPoint = getCurrentPoint();
-        Trip currentTrip = new Trip(tripName, startingPoint);
-        // Final may break this
-        final DatabaseHandler db = new DatabaseHandler(getBaseContext());
-        tripId = db.addTrip(currentTrip);
+        currentTrip = new Trip(tripName, startingPoint);
 
+        tripId = db.addTrip(currentTrip);
         h.postDelayed(new Runnable() {
             @Override
             public void run() {
                 //Get co-ordinates and time to add it as a point
                 h.postDelayed(this, INTERVAL);
-
                 Log.d(DEBUG_TAG, "Getting current point and adding to Database");
                 Point p = getCurrentPoint();
                 db.addPoint(new Point(tripId, p.Time(), p.Longitude(), p.Latitude()));
+                currentTrip.addPoint(p);
             }
         }, INTERVAL);
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        // Double check the user wants to exit
+        
     }
 
     public Point getCurrentPoint() {
