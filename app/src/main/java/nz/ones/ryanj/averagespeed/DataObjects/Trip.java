@@ -5,6 +5,7 @@ import android.util.Log;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import nz.ones.ryanj.averagespeed.DatabaseHandler;
 
@@ -82,6 +83,18 @@ public class Trip
     public void addPoint(Point point)
     {
         //Points.add(point);
+    }
+
+    /** General Methods **/
+    public String getTimeDifference()
+    {
+        long duration  = _endTime.getTime() - _startTime.getTime();
+
+        long diffInSeconds = TimeUnit.MILLISECONDS.toSeconds(duration);
+        long diffInMinutes = TimeUnit.MILLISECONDS.toMinutes(duration);
+        long diffInHours = TimeUnit.MILLISECONDS.toHours(duration);
+
+        return diffInHours + "h:"+diffInMinutes + "m:" + diffInSeconds + "s";
     }
 
 }

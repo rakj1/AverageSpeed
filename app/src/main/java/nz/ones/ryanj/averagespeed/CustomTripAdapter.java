@@ -19,7 +19,7 @@ import nz.ones.ryanj.averagespeed.DataObjects.Trip;
 /**
  * Created by Ryan Jones on 13/12/2015.
  */
-public class AdapterCustom extends BaseAdapter implements View.OnClickListener
+public class CustomTripAdapter extends BaseAdapter implements View.OnClickListener
 {
     /*********** Declare Used Variables *********/
     private Activity activity;
@@ -28,8 +28,8 @@ public class AdapterCustom extends BaseAdapter implements View.OnClickListener
     public Resources res;
     Trip tempValues = null;
 
-    /*************  AdapterCustom Constructor *****************/
-    public AdapterCustom(Activity a, ArrayList d, Resources resLocal) {
+    /*************  CustomTripAdapter Constructor *****************/
+    public CustomTripAdapter(Activity a, ArrayList d, Resources resLocal) {
         /********** Take passed values **********/
         activity = a;
         data=d;
@@ -110,7 +110,7 @@ public class AdapterCustom extends BaseAdapter implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
-        Log.v("AdapterCustom", "=====Row button clicked=====");
+        Log.v("CustomTripAdapter", "=====Row button clicked=====");
     }
 
     /********* Called when Item click in ListView ************/

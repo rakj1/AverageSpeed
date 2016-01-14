@@ -15,7 +15,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import nz.ones.ryanj.averagespeed.AdapterCustom;
+import nz.ones.ryanj.averagespeed.CustomTripAdapter;
 import nz.ones.ryanj.averagespeed.DatabaseHandler;
 import nz.ones.ryanj.averagespeed.R;
 import nz.ones.ryanj.averagespeed.DataObjects.Trip;
@@ -31,7 +31,7 @@ public class ActivityCustomListViewTrip extends AppCompatActivity{
     private static final int REQUEST_GPS = 0;
 
     ListView list;
-    AdapterCustom adapter;
+    CustomTripAdapter adapter;
     public ActivityCustomListViewTrip CustomListView = null;
     ArrayList<Trip> trips = null;
     DatabaseHandler db;
@@ -76,7 +76,7 @@ public class ActivityCustomListViewTrip extends AppCompatActivity{
         /******** Create Custom Adapter *********/
         d(DEBUG_TAG, "Fetching " + db.getTripCount() + " trips");
         trips = db.getAllTrips();
-        adapter = new AdapterCustom(CustomListView, trips, res);
+        adapter = new CustomTripAdapter(CustomListView, trips, res);
         list.setAdapter(adapter);
         list.deferNotifyDataSetChanged();
     }

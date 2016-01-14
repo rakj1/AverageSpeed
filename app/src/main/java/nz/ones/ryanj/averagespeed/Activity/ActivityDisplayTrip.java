@@ -8,8 +8,6 @@ import android.widget.TextView;
 
 import java.text.Format;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 import nz.ones.ryanj.averagespeed.DatabaseHandler;
 import nz.ones.ryanj.averagespeed.R;
@@ -48,7 +46,7 @@ public class ActivityDisplayTrip extends AppCompatActivity {
         TextView viewEndTime = (TextView) findViewById(R.id.textViewEndTime);
         viewEndTime.setText(dateFormat.format(thisTrip.EndTime()));
         TextView TripTime = (TextView) findViewById(R.id.textViewTotalTime);
-        TripTime.setText(getTimeDifference(thisTrip.StartTime(), thisTrip.EndTime()));
+        TripTime.setText(thisTrip.getTimeDifference());
 
         TextView AverageSpeed = (TextView) findViewById(R.id.textViewAverage);
         //AverageSpeed.setText(TODO);
@@ -57,16 +55,6 @@ public class ActivityDisplayTrip extends AppCompatActivity {
     }
 
 
-    private String getTimeDifference(Date startTime, Date endTime)
-    {
-        long duration  = endTime.getTime() - startTime.getTime();
-
-        long diffInSeconds = TimeUnit.MILLISECONDS.toSeconds(duration);
-        long diffInMinutes = TimeUnit.MILLISECONDS.toMinutes(duration);
-        long diffInHours = TimeUnit.MILLISECONDS.toHours(duration);
-
-        return diffInHours + "h:"+diffInMinutes + "m:" + diffInSeconds + "s";
-    }
 
     private void end(String errMsg)
     {
