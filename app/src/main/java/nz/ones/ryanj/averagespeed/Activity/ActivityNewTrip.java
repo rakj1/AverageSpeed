@@ -15,6 +15,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.android.gms.maps.GoogleMap;
+
 import java.util.Calendar;
 import java.util.Date;
 
@@ -33,6 +35,7 @@ public class ActivityNewTrip extends AppCompatActivity {
 
     private Trip currentTrip;
     private long tripId;
+    private GoogleMap googleMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

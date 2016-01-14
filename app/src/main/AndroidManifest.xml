@@ -32,6 +32,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="nz.ones.ryanj.averagespeed.Activity.ActivityCustomListViewTrip" />
         </activity>
+
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyBnXDb3Xyn6-e4oyeGe5m2TjWWPCJp9H80" />
     </application>
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
