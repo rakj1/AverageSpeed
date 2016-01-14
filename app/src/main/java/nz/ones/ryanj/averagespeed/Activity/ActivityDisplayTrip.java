@@ -65,7 +65,7 @@ public class ActivityDisplayTrip extends AppCompatActivity {
         long diffInMinutes = TimeUnit.MILLISECONDS.toMinutes(duration);
         long diffInHours = TimeUnit.MILLISECONDS.toHours(duration);
 
-        return diffInHours + ":"+diffInMinutes + ":" + diffInSeconds;
+        return diffInHours + "h:"+diffInMinutes + "m:" + diffInSeconds + "s";
     }
 
     private void end(String errMsg)

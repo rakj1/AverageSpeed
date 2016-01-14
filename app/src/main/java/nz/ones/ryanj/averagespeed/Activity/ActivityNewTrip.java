@@ -115,6 +115,7 @@ public class ActivityNewTrip extends AppCompatActivity {
             }
         }
         Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        //TODO: Deal with the LocationManager being null
         Double latitude = location.getLatitude();
         Double longitude = location.getLongitude();
         Point point = new Point(startTime, latitude, longitude);
