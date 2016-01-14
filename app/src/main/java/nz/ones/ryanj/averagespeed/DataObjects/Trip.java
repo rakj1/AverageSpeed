@@ -1,5 +1,7 @@
 package nz.ones.ryanj.averagespeed.DataObjects;
 
+import android.util.Log;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -39,6 +41,7 @@ public class Trip
 
     public Trip(int ID, String Name, String StartTime, String EndTime, String AverageSpeed, String Distance)
     {
+        Log.d(DEBUG_TAG, "Creating Trip: " + ID + ", " + Name + ", " + StartTime + ", " + EndTime + ", " + AverageSpeed + ", " + Distance);
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
         try {
             this._id = ID;

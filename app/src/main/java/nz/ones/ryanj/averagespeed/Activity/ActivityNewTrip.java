@@ -1,6 +1,7 @@
 package nz.ones.ryanj.averagespeed.Activity;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
@@ -9,9 +10,6 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -32,11 +30,10 @@ public class ActivityNewTrip extends AppCompatActivity {
     private final String DEBUG_TAG = "AverageSpeed." + getClass().getCanonicalName();
 
     private final static int INTERVAL = 1000 * 20;     //20 Seconds
-    private static final int REQUEST_GPS = 0;
     final Handler h = new Handler();
+
     private Trip currentTrip;
     private long tripId;
-    private View mLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +67,7 @@ public class ActivityNewTrip extends AppCompatActivity {
             public void run() {
                 //Get co-ordinates and time to add it as a point
                 h.postDelayed(this, INTERVAL);
-                Log.d(DEBUG_TAG, "Getting current point and adding to Database");
+                Log.d(DEBUG_TAG, "Trip " + tripId + ": Getting current point and adding to Database");
                 Point p = getCurrentPoint();
                 db.addPoint(new Point(tripId, p.Time(), p.Longitude(), p.Latitude()));
                 currentTrip.addPoint(p);
@@ -79,8 +76,7 @@ public class ActivityNewTrip extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed()
-    {
+    public void onBackPressed() {
         // Double check the user wants to exit
         new AlertDialog.Builder(this)
                 .setTitle("End Trip")
@@ -90,58 +86,45 @@ public class ActivityNewTrip extends AppCompatActivity {
 
                     public void onClick(DialogInterface dialog, int whichButton) {
                         endTrip();
-                    }})
+                    }
+                })
                 .setNegativeButton(android.R.string.no, null).show();
     }
 
-    public void endTrip()
-    {
+    public void endTrip() {
         final DatabaseHandler db = new DatabaseHandler(getBaseContext());
-        Log.d(DEBUG_TAG, "Ending trip. Getting last point and adding to database");
+        Log.d(DEBUG_TAG, "Ending trip:" + currentTrip.ID() + ": Getting last point and adding to database");
         Point p = getCurrentPoint();
         db.addPoint(new Point(tripId, p.Time(), p.Longitude(), p.Latitude()));
+        currentTrip = db.getTrip(tripId);
         currentTrip.endTrip(p);
         db.updateTrip(currentTrip);
         finish();
     }
+
 
     public Point getCurrentPoint() {
         Date startTime = (Calendar.getInstance().getTime());
 
         LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                    && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-                requestGPSPermissions(Manifest.permission.ACCESS_FINE_LOCATION);
-                requestGPSPermissions(Manifest.permission.ACCESS_COARSE_LOCATION);
+            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                error("Cannot get last location. Cannot start trip");
+                finish();
+                return null;
             }
         }
         Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         Double latitude = location.getLatitude();
         Double longitude = location.getLongitude();
-
         Point point = new Point(startTime, latitude, longitude);
 
         return point;
     }
 
-    private void requestGPSPermissions(final String permission) {
-        Log.d(DEBUG_TAG, "GPS Permission has not been granted. Requesting permission");
-
-        if (ActivityCompat.shouldShowRequestPermissionRationale(this, permission)) {
-            Snackbar.make(mLayout, "The App needs access to the GPS to get the length of the trip",
-                    Snackbar.LENGTH_INDEFINITE).setAction("Ok", new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    ActivityCompat.requestPermissions(ActivityNewTrip.this, new String[]{permission}, REQUEST_GPS);
-                }
-            }).show();
-
-        } else {
-            // Permission has not been granted yet. Request it directly.
-            ActivityCompat.requestPermissions(this, new String[]{permission},
-                    REQUEST_GPS);
-        }
+    private void error(String errorMessage)
+    {
+        Log.d(DEBUG_TAG, errorMessage);
+        finish();
     }
 }

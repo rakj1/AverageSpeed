@@ -94,7 +94,7 @@ public class DatabaseHandler extends SQLiteOpenHelper
         db.close();
         return id;
     }
-    public Trip getTrip(int id)
+    public Trip getTrip(long id)
     {
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -119,8 +119,8 @@ public class DatabaseHandler extends SQLiteOpenHelper
 
         if(cursor.moveToFirst())
             do {
-                Trip t = new Trip(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2), cursor.getString(3)
-                        , cursor.getString(4), cursor.getString(5));
+                Trip t = new Trip(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2), cursor.getString(3),
+                        cursor.getString(4), cursor.getString(5));
                 tripList.add(t);
             } while (cursor.moveToNext());
 
@@ -211,8 +211,8 @@ public class DatabaseHandler extends SQLiteOpenHelper
             do
             {
                 try {
-                    Point p = new Point(Integer.parseInt(cursor.getString(0)), dateFormat.parse(cursor.getString(1)), Double.parseDouble(cursor.getString(2))
-                            , Double.parseDouble(cursor.getString(3)));
+                    Point p = new Point(Integer.parseInt(cursor.getString(0)), dateFormat.parse(cursor.getString(1)), Double.parseDouble(cursor.getString(2)),
+                            Double.parseDouble(cursor.getString(3)));
                     pointList.add(p);
                 }
                 catch (ParseException ex)

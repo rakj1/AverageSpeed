@@ -47,14 +47,13 @@ public class ActivityDisplayTrip extends AppCompatActivity {
         viewStartTime.setText(dateFormat.format(thisTrip.StartTime()));
         TextView viewEndTime = (TextView) findViewById(R.id.textViewEndTime);
         viewEndTime.setText(dateFormat.format(thisTrip.EndTime()));
-        TextView TripTime = (TextView) findViewById(R.id.tripTime);
+        TextView TripTime = (TextView) findViewById(R.id.textViewTotalTime);
         TripTime.setText(getTimeDifference(thisTrip.StartTime(), thisTrip.EndTime()));
 
         TextView AverageSpeed = (TextView) findViewById(R.id.textViewAverage);
         //AverageSpeed.setText(TODO);
         TextView Distance = (TextView) findViewById(R.id.textViewDistance);
         //Distance.setText(TODO);
-
     }
 
 
