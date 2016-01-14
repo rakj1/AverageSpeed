@@ -1,7 +1,6 @@
 package nz.ones.ryanj.averagespeed.Activity;
 
 import android.Manifest;
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
@@ -24,6 +23,8 @@ import nz.ones.ryanj.averagespeed.DataObjects.Point;
 import nz.ones.ryanj.averagespeed.DataObjects.Trip;
 import nz.ones.ryanj.averagespeed.DatabaseHandler;
 import nz.ones.ryanj.averagespeed.R;
+
+import static android.util.Log.d;
 
 public class ActivityNewTrip extends AppCompatActivity {
 
@@ -57,7 +58,7 @@ public class ActivityNewTrip extends AppCompatActivity {
 
         //Create a new trip and add to the db getting the ID of the trip
         String tripName = "trip: " + Calendar.getInstance().getTime().toString();
-        Log.d(DEBUG_TAG, "Starting trip \"" + tripName + "\" and adding to Database");
+        d(DEBUG_TAG, "Starting trip \"" + tripName + "\" and adding to Database");
         Point startingPoint = getCurrentPoint();
         currentTrip = new Trip(tripName, startingPoint);
 
@@ -67,7 +68,7 @@ public class ActivityNewTrip extends AppCompatActivity {
             public void run() {
                 //Get co-ordinates and time to add it as a point
                 h.postDelayed(this, INTERVAL);
-                Log.d(DEBUG_TAG, "Trip " + tripId + ": Getting current point and adding to Database");
+                d(DEBUG_TAG, "Trip " + tripId + ": Getting current point and adding to Database");
                 Point p = getCurrentPoint();
                 db.addPoint(new Point(tripId, p.Time(), p.Longitude(), p.Latitude()));
                 currentTrip.addPoint(p);
@@ -77,6 +78,7 @@ public class ActivityNewTrip extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        d(DEBUG_TAG, "User pressed back button");
         // Double check the user wants to exit
         new AlertDialog.Builder(this)
                 .setTitle("End Trip")
@@ -93,7 +95,7 @@ public class ActivityNewTrip extends AppCompatActivity {
 
     public void endTrip() {
         final DatabaseHandler db = new DatabaseHandler(getBaseContext());
-        Log.d(DEBUG_TAG, "Ending trip:" + currentTrip.ID() + ": Getting last point and adding to database");
+        d(DEBUG_TAG, "Ending trip:" + currentTrip.ID() + ": Getting last point and adding to database");
         Point p = getCurrentPoint();
         db.addPoint(new Point(tripId, p.Time(), p.Longitude(), p.Latitude()));
         currentTrip = db.getTrip(tripId);
@@ -125,7 +127,7 @@ public class ActivityNewTrip extends AppCompatActivity {
 
     private void error(String errorMessage)
     {
-        Log.d(DEBUG_TAG, errorMessage);
+        d(DEBUG_TAG, errorMessage);
         finish();
     }
 }

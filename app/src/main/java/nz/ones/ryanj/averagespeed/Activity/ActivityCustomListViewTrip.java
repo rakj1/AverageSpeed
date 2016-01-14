@@ -10,7 +10,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
@@ -53,10 +52,10 @@ public class ActivityCustomListViewTrip extends AppCompatActivity{
             public void onClick(View v) {
                 d(DEBUG_TAG, "Add button clicked");
 
-                d(DEBUG_TAG, "Checking if we have GPS permission");
                 boolean b = checkForPermission(Manifest.permission.ACCESS_FINE_LOCATION, REQUEST_GPS);
                 if (b)
                 {
+                    d(DEBUG_TAG, "Starting new trip Intent");
                     Intent i = new Intent(getBaseContext(), ActivityNewTrip.class);
                     startActivity(i);
                 }
@@ -70,7 +69,6 @@ public class ActivityCustomListViewTrip extends AppCompatActivity{
     public void refresh()
     {
         d(DEBUG_TAG, "Refreshing");
-
         /******** Take some data in Array list ********/
         Resources res = getResources();
         list = (ListView)findViewById(R.id.tripList);
@@ -81,14 +79,12 @@ public class ActivityCustomListViewTrip extends AppCompatActivity{
         adapter = new AdapterCustom(CustomListView, trips, res);
         list.setAdapter(adapter);
         list.deferNotifyDataSetChanged();
-
     }
 
     /********  This function used by adapter ********/
     public void onItemClick(int mPosition)
     {
         Trip tempTrip = trips.get(mPosition);
-
         d(DEBUG_TAG, "Opening Trip:" + mPosition + " " + tempTrip.Name());
         Intent i = new Intent(getBaseContext(), ActivityDisplayTrip.class);
         i.putExtra("TRIP_ID", tempTrip.ID());
@@ -99,11 +95,12 @@ public class ActivityCustomListViewTrip extends AppCompatActivity{
     {
         boolean b = true;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            d(DEBUG_TAG, "We are running on 6.0");
             if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                     && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
+                d(DEBUG_TAG, "Don't have GPS Permission. Asking for it.");
                 if (ActivityCompat.shouldShowRequestPermissionRationale(this, permission)) {
-                    Snackbar.make(mLayout, "The App needs access to the GPS to get the length of the trip",
+                    Snackbar.make(mLayout, "The App needs " + permission + " to work correctly.",
                             Snackbar.LENGTH_INDEFINITE).setAction("Ok", new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {

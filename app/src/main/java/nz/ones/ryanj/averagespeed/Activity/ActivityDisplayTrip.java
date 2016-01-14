@@ -89,7 +89,4 @@ public class ActivityDisplayTrip extends AppCompatActivity {
         finish();
     }
 
-
-
-
 }

@@ -27,11 +27,9 @@ public class AdapterCustom extends BaseAdapter implements View.OnClickListener
     private static LayoutInflater inflater=null;
     public Resources res;
     Trip tempValues = null;
-    int i=0;
 
     /*************  AdapterCustom Constructor *****************/
     public AdapterCustom(Activity a, ArrayList d, Resources resLocal) {
-
         /********** Take passed values **********/
         activity = a;
         data=d;
@@ -39,7 +37,6 @@ public class AdapterCustom extends BaseAdapter implements View.OnClickListener
 
         /***********  Layout inflator to call external xml layout () ***********/
         inflater = ( LayoutInflater )activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
     }
 
     /******** What is the size of Passed Arraylist Size ************/
@@ -59,7 +56,6 @@ public class AdapterCustom extends BaseAdapter implements View.OnClickListener
 
     /********* Create a holder Class to contain inflated xml file elements *********/
     public static class ViewHolder{
-
         public TextView name;
         public TextView time;
         public TextView distance;
@@ -73,7 +69,6 @@ public class AdapterCustom extends BaseAdapter implements View.OnClickListener
         ViewHolder holder;
 
         if(convertView == null){
-
             /****** Inflate tabitem.xml file for each row ( Defined below ) *******/
             vi = inflater.inflate(R.layout.tabitem, null);
 
@@ -121,16 +116,13 @@ public class AdapterCustom extends BaseAdapter implements View.OnClickListener
     /********* Called when Item click in ListView ************/
     private class OnItemClickListener  implements View.OnClickListener {
         private int mPosition;
-
         OnItemClickListener(int position){
             mPosition = position;
         }
 
         @Override
         public void onClick(View arg0) {
-
             ActivityCustomListViewTrip sct = (ActivityCustomListViewTrip)activity;
-
             /****  Call  onItemClick Method inside ActivityCustomListViewTrip Class ( See Below )****/
             sct.onItemClick(mPosition);
         }
