@@ -26,7 +26,7 @@ public class CustomTripAdapter extends BaseAdapter implements View.OnClickListen
     private ArrayList data;
     private static LayoutInflater inflater=null;
     public Resources res;
-    Trip tempValues = null;
+    private Trip tempValues = null;
 
     /*************  CustomTripAdapter Constructor *****************/
     public CustomTripAdapter(Activity a, ArrayList d, Resources resLocal) {

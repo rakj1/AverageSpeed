@@ -18,8 +18,7 @@ import static android.util.Log.d;
 public class ActivityDisplayTrip extends AppCompatActivity {
 
     private final String DEBUG_TAG =  "AverageSpeed." + getClass().getCanonicalName();
-
-    DatabaseHandler db;
+    private DatabaseHandler db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -53,8 +52,6 @@ public class ActivityDisplayTrip extends AppCompatActivity {
         TextView Distance = (TextView) findViewById(R.id.textViewDistance);
         //Distance.setText(TODO);
     }
-
-
 
     private void end(String errMsg)
     {

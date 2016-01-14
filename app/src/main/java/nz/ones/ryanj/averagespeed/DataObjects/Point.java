@@ -2,8 +2,6 @@ package nz.ones.ryanj.averagespeed.DataObjects;
 
 import java.util.Date;
 
-import static android.util.Log.d;
-
 /**
  * Created by Ryan Jones on 15/12/2015.
  */

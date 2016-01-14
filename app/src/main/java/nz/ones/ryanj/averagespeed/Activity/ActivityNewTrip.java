@@ -12,7 +12,6 @@ import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -29,8 +28,7 @@ import static android.util.Log.d;
 public class ActivityNewTrip extends AppCompatActivity {
 
     private final String DEBUG_TAG = "AverageSpeed." + getClass().getCanonicalName();
-
-    private final static int INTERVAL = 1000 * 20;     //20 Seconds
+    private final int INTERVAL = 1000 * 20;     //20 Seconds
     final Handler h = new Handler();
 
     private Trip currentTrip;
@@ -103,7 +101,6 @@ public class ActivityNewTrip extends AppCompatActivity {
         db.updateTrip(currentTrip);
         finish();
     }
-
 
     public Point getCurrentPoint() {
         Date startTime = (Calendar.getInstance().getTime());

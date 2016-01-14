@@ -28,13 +28,13 @@ import static android.util.Log.d;
 public class ActivityCustomListViewTrip extends AppCompatActivity{
 
     private final String DEBUG_TAG =  "AverageSpeed." + getClass().getCanonicalName();
-    private static final int REQUEST_GPS = 0;
+    private final int REQUEST_GPS = 0;
 
-    ListView list;
-    CustomTripAdapter adapter;
+    private ListView list;
+    private CustomTripAdapter adapter;
     public ActivityCustomListViewTrip CustomListView = null;
-    ArrayList<Trip> trips = null;
-    DatabaseHandler db;
+    private ArrayList<Trip> trips = null;
+    private DatabaseHandler db;
     private View mLayout;
 
     @Override

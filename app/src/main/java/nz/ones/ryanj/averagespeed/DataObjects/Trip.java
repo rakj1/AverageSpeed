@@ -7,8 +7,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-import nz.ones.ryanj.averagespeed.DatabaseHandler;
-
 import static android.util.Log.d;
 
 /**
