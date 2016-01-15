@@ -66,6 +66,13 @@ public class ActivityCustomListViewTrip extends AppCompatActivity{
         refresh();
     }
 
+    @Override
+    public void onRestart()
+    {
+        refresh();
+        super.onRestart();
+    }
+
     public void refresh()
     {
         d(DEBUG_TAG, "Refreshing");
