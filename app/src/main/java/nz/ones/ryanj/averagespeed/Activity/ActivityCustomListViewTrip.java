@@ -100,6 +100,7 @@ public class ActivityCustomListViewTrip extends AppCompatActivity{
                     && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 d(DEBUG_TAG, "Don't have GPS Permission. Asking for it.");
                 if (ActivityCompat.shouldShowRequestPermissionRationale(this, permission)) {
+                    d(DEBUG_TAG, "Asking for permission with rational.");
                     Snackbar.make(mLayout, "The App needs " + permission + " to work correctly.",
                             Snackbar.LENGTH_INDEFINITE).setAction("Ok", new View.OnClickListener() {
                         @Override
@@ -109,6 +110,7 @@ public class ActivityCustomListViewTrip extends AppCompatActivity{
                     }).show();
                     b = false;
                 } else {
+                    d(DEBUG_TAG, "Asking for permission directly.");
                     // Permission has not been granted yet. Request it directly.
                     b = false;      // Don't return value directly after this as gets skipped over
                     ActivityCompat.requestPermissions(this, new String[]{permission},
