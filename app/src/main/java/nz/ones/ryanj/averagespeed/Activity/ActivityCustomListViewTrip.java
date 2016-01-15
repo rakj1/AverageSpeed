@@ -96,8 +96,8 @@ public class ActivityCustomListViewTrip extends AppCompatActivity{
         boolean b = true;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             d(DEBUG_TAG, "We are running on 6.0");
-            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                    && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED)
+            {
                 d(DEBUG_TAG, "Don't have GPS Permission. Asking for it.");
                 if (ActivityCompat.shouldShowRequestPermissionRationale(this, permission)) {
                     d(DEBUG_TAG, "Asking for permission with rational.");
