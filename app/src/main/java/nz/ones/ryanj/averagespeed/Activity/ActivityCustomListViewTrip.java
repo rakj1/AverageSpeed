@@ -105,7 +105,7 @@ public class ActivityCustomListViewTrip extends AppCompatActivity{
             d(DEBUG_TAG, "We are running on 6.0");
             if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED)
             {
-                d(DEBUG_TAG, "Don't have GPS Permission. Asking for it.");
+                d(DEBUG_TAG, "Don't have " + permission +". Asking for it.");
                 if (ActivityCompat.shouldShowRequestPermissionRationale(this, permission)) {
                     d(DEBUG_TAG, "Asking for permission with rational.");
                     Snackbar.make(mLayout, "The App needs " + permission + " to work correctly.",
