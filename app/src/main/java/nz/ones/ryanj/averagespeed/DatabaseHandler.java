@@ -200,7 +200,7 @@ public class DatabaseHandler extends SQLiteOpenHelper
     public ArrayList<Point> getAllPoints(int tripId)
     {
         ArrayList<Point> pointList = new ArrayList<>();
-        String selectQuery = "SELECT * FROM " + TABLE_POINT + " WHERE " + POINT_TRIP_ID + " = " + tripId;
+        String selectQuery = "SELECT + " + POINT_ID + ", " + POINT_TIME + ", " + POINT_LAT + ", " + POINT_LONG + "  FROM " + TABLE_POINT + " WHERE " + POINT_TRIP_ID + " = " + tripId;
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss.sss");
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -211,6 +211,7 @@ public class DatabaseHandler extends SQLiteOpenHelper
             do
             {
                 try {
+                    d(DEBUG_TAG, "Getting point from DB: " + cursor.getString(0) + ": " + cursor.getString(1) + ": " + cursor.getString(2)+ ": " + cursor.getString(3) + "");
                     Point p = new Point(Integer.parseInt(cursor.getString(0)), dateFormat.parse(cursor.getString(1)), Double.parseDouble(cursor.getString(2)),
                             Double.parseDouble(cursor.getString(3)));
                     pointList.add(p);

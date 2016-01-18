@@ -28,7 +28,7 @@ import static android.util.Log.d;
 public class ActivityCustomListViewTrip extends AppCompatActivity{
 
     private final String DEBUG_TAG =  "AverageSpeed." + getClass().getCanonicalName();
-    private final int REQUEST_GPS = 0;
+    private final int REQUEST_GPS = 1;
 
     private ListView list;
     private CustomTripAdapter adapter;

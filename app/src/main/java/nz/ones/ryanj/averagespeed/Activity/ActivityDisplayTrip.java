@@ -2,8 +2,11 @@ package nz.ones.ryanj.averagespeed.Activity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.text.Format;
@@ -34,6 +37,7 @@ public class ActivityDisplayTrip extends AppCompatActivity {
             end("Can't find trip position");
         }
         Trip thisTrip = db.getTrip(extras.getInt("TRIP_ID"));
+        final int tripId = thisTrip.ID();
 
         /********Boring UI binding********/
         TextView Name = (TextView) findViewById(R.id.textViewName);
@@ -51,6 +55,17 @@ public class ActivityDisplayTrip extends AppCompatActivity {
         //AverageSpeed.setText(TODO);
         TextView Distance = (TextView) findViewById(R.id.textViewDistance);
         //Distance.setText(TODO);
+
+        /**** Button OnClicks ****/
+        Button viewTrip = (Button) findViewById(R.id.buttonViewTripMap);
+        viewTrip.setOnClickListener(new Button.OnClickListener()
+        {
+            public void onClick(View v){
+                Intent i = new Intent(getBaseContext(), ActivityViewTripOnMap.class);
+                i.putExtra("TRIP_ID", tripId);
+                startActivity(i);
+            }
+        });
     }
 
     private void end(String errMsg)

@@ -69,4 +69,15 @@
         android:layout_alignBottom="@+id/textViewDistance"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View Trip on Map"
+        android:id="@+id/buttonViewTripMap"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/textViewAverage"
+        android:layout_alignEnd="@+id/textViewAverage"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>

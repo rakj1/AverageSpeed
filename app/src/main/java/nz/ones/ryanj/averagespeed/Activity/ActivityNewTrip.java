@@ -15,7 +15,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -27,7 +32,8 @@ import nz.ones.ryanj.averagespeed.R;
 
 import static android.util.Log.d;
 
-public class ActivityNewTrip extends AppCompatActivity {
+public class ActivityNewTrip extends AppCompatActivity
+        implements OnMapReadyCallback {
 
     private final String DEBUG_TAG = "AverageSpeed." + getClass().getCanonicalName();
     private final int INTERVAL = 1000 * 20;     //20 Seconds
@@ -35,7 +41,7 @@ public class ActivityNewTrip extends AppCompatActivity {
 
     private Trip currentTrip;
     private long tripId;
-    private GoogleMap googleMap;
+    private MapFragment map;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +54,7 @@ public class ActivityNewTrip extends AppCompatActivity {
         final DatabaseHandler db = new DatabaseHandler(getBaseContext());
 
         /********Boring UI binding********/
-        /*Start Trip Button*/
+        /*End Trip Button*/
         Button endButton = (Button) findViewById(R.id.buttonEndTrip);
         endButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
@@ -56,6 +62,9 @@ public class ActivityNewTrip extends AppCompatActivity {
                 endTrip();
             }
         });
+
+        map = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
+        map.getMapAsync(this);
 
         //Create a new trip and add to the db getting the ID of the trip
         String tripName = "trip: " + Calendar.getInstance().getTime().toString();
@@ -92,6 +101,14 @@ public class ActivityNewTrip extends AppCompatActivity {
                     }
                 })
                 .setNegativeButton(android.R.string.no, null).show();
+    }
+
+    @Override
+    public void onMapReady(GoogleMap map)
+    {
+        LatLng sydney = new LatLng(-34, 151);
+        map.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        map.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 
     public void endTrip() {

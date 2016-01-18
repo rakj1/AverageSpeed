@@ -2,6 +2,8 @@ package nz.ones.ryanj.averagespeed.DataObjects;
 
 import java.util.Date;
 
+import static android.util.Log.d;
+
 /**
  * Created by Ryan Jones on 15/12/2015.
  */
@@ -16,6 +18,7 @@ public class Point
 
     public Point(Date Time, Double Long, Double Lat)
     {
+        d(DEBUG_TAG, "Creating point " + Time + ": " + Long + ": " + Lat);
         this._time = Time;
         this._latitude = Lat;
         this._longitude = Long;
@@ -23,6 +26,7 @@ public class Point
 
     public Point(long ID, Date Time, Double Long, Double Lat)
     {
+        d(DEBUG_TAG, "Creating point " + Time + ": " + Long + ": " + Lat);
         this._id = ID;
         this._time = Time;
         this._latitude = Lat;
