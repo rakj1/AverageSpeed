@@ -32,8 +32,7 @@ import nz.ones.ryanj.averagespeed.R;
 
 import static android.util.Log.d;
 
-public class ActivityNewTrip extends AppCompatActivity
-        implements OnMapReadyCallback {
+public class ActivityNewTrip extends AppCompatActivity {
 
     private final String DEBUG_TAG = "AverageSpeed." + getClass().getCanonicalName();
     private final int INTERVAL = 1000 * 20;     //20 Seconds
@@ -41,7 +40,6 @@ public class ActivityNewTrip extends AppCompatActivity
 
     private Trip currentTrip;
     private long tripId;
-    private MapFragment map;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,9 +60,6 @@ public class ActivityNewTrip extends AppCompatActivity
                 endTrip();
             }
         });
-
-        map = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
-        map.getMapAsync(this);
 
         //Create a new trip and add to the db getting the ID of the trip
         String tripName = "trip: " + Calendar.getInstance().getTime().toString();
@@ -101,14 +96,6 @@ public class ActivityNewTrip extends AppCompatActivity
                     }
                 })
                 .setNegativeButton(android.R.string.no, null).show();
-    }
-
-    @Override
-    public void onMapReady(GoogleMap map)
-    {
-        LatLng sydney = new LatLng(-34, 151);
-        map.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        map.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 
     public void endTrip() {

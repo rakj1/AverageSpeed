@@ -62,7 +62,6 @@ public class ActivityViewTripOnMap extends FragmentActivity implements OnMapRead
         mMap = googleMap;
 
         // Add all the points to the map
-
         List<Point> points = db.getAllPoints(tripId);
         LatLng latLng = null;
         for(Point p: points)
