@@ -15,13 +15,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-
 import java.util.Calendar;
 import java.util.Date;
 
@@ -29,13 +22,13 @@ import nz.ones.ryanj.averagespeed.DataObjects.Point;
 import nz.ones.ryanj.averagespeed.DataObjects.Trip;
 import nz.ones.ryanj.averagespeed.DatabaseHandler;
 import nz.ones.ryanj.averagespeed.R;
+import nz.ones.ryanj.averagespeed.Util.Constants;
 
 import static android.util.Log.d;
 
 public class ActivityNewTrip extends AppCompatActivity {
 
     private final String DEBUG_TAG = "AverageSpeed." + getClass().getCanonicalName();
-    private final int INTERVAL = 1000 * 20;     //20 Seconds
     final Handler h = new Handler();
 
     private Trip currentTrip;
@@ -72,13 +65,13 @@ public class ActivityNewTrip extends AppCompatActivity {
             @Override
             public void run() {
                 //Get co-ordinates and time to add it as a point
-                h.postDelayed(this, INTERVAL);
+                h.postDelayed(this, Constants.getTimeInterval());
                 d(DEBUG_TAG, "Trip " + tripId + ": Getting current point and adding to Database");
                 Point p = getCurrentPoint();
                 db.addPoint(new Point(tripId, p.Time(), p.Longitude(), p.Latitude()));
                 currentTrip.addPoint(p);
             }
-        }, INTERVAL);
+        }, Constants.getTimeInterval());
     }
 
     @Override

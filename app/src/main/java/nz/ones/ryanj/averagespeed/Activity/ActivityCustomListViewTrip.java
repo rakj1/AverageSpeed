@@ -30,8 +30,6 @@ public class ActivityCustomListViewTrip extends AppCompatActivity{
     private final String DEBUG_TAG =  "AverageSpeed." + getClass().getCanonicalName();
     private final int REQUEST_GPS = 1;
 
-    private ListView list;
-    private CustomTripAdapter adapter;
     public ActivityCustomListViewTrip CustomListView = null;
     private ArrayList<Trip> trips = null;
     private DatabaseHandler db;
@@ -55,6 +53,7 @@ public class ActivityCustomListViewTrip extends AppCompatActivity{
                 boolean b = checkForPermission(Manifest.permission.ACCESS_FINE_LOCATION, REQUEST_GPS);
                 if (b)
                 {
+                    //TODO: Check for GPS being on
                     d(DEBUG_TAG, "Starting new trip Intent");
                     Intent i = new Intent(getBaseContext(), ActivityNewTrip.class);
                     startActivity(i);
@@ -78,12 +77,12 @@ public class ActivityCustomListViewTrip extends AppCompatActivity{
         d(DEBUG_TAG, "Refreshing");
         /******** Take some data in Array list ********/
         Resources res = getResources();
-        list = (ListView)findViewById(R.id.tripList);
+        ListView list = (ListView) findViewById(R.id.tripList);
 
         /******** Create Custom Adapter *********/
         d(DEBUG_TAG, "Fetching " + db.getTripCount() + " trips");
         trips = db.getAllTrips();
-        adapter = new CustomTripAdapter(CustomListView, trips, res);
+        CustomTripAdapter adapter = new CustomTripAdapter(CustomListView, trips, res);
         list.setAdapter(adapter);
         list.deferNotifyDataSetChanged();
     }
