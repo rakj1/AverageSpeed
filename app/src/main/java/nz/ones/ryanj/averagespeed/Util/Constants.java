@@ -5,16 +5,6 @@ package nz.ones.ryanj.averagespeed.Util;
  */
 public class Constants
 {
-    private static final int TIME_INTERVAL = 1000 * 20;     //20 Seconds
-    private static final int DISTANCE_INTERVAL = 200;       //200 meters
-
-    public static int getTimeInterval()
-    {
-        return TIME_INTERVAL;
-    }
-
-    public static int getDistanceInterval()
-    {
-        return DISTANCE_INTERVAL;
-    }
+    public static final int TIME_INTERVAL = 1000 * 20;     //20 Seconds
+    public static final int DISTANCE_INTERVAL = 2000;      //2 km
 }

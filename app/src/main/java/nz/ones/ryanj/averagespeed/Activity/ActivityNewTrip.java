@@ -9,11 +9,18 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -26,10 +33,16 @@ import nz.ones.ryanj.averagespeed.Util.Constants;
 
 import static android.util.Log.d;
 
-public class ActivityNewTrip extends AppCompatActivity {
+public class ActivityNewTrip extends AppCompatActivity implements
+        GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener,
+        LocationListener {
 
     private final String DEBUG_TAG = "AverageSpeed." + getClass().getCanonicalName();
     final Handler h = new Handler();
+
+    private GoogleApiClient mGoogleApiClient;
+    private LocationRequest mLocationRequest;
 
     private Trip currentTrip;
     private long tripId;
@@ -54,6 +67,12 @@ public class ActivityNewTrip extends AppCompatActivity {
             }
         });
 
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+
         //Create a new trip and add to the db getting the ID of the trip
         String tripName = "trip: " + Calendar.getInstance().getTime().toString();
         d(DEBUG_TAG, "Starting trip \"" + tripName + "\" and adding to Database");
@@ -65,13 +84,25 @@ public class ActivityNewTrip extends AppCompatActivity {
             @Override
             public void run() {
                 //Get co-ordinates and time to add it as a point
-                h.postDelayed(this, Constants.getTimeInterval());
-                d(DEBUG_TAG, "Trip " + tripId + ": Getting current point and adding to Database");
-                Point p = getCurrentPoint();
-                db.addPoint(new Point(tripId, p.Time(), p.Longitude(), p.Latitude()));
-                currentTrip.addPoint(p);
+                h.postDelayed(this, Constants.TIME_INTERVAL);
+                addPoint(db);
             }
-        }, Constants.getTimeInterval());
+        }, Constants.TIME_INTERVAL);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mGoogleApiClient.connect();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (mGoogleApiClient.isConnected()) {
+            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+            mGoogleApiClient.disconnect();
+        }
     }
 
     @Override
@@ -89,6 +120,45 @@ public class ActivityNewTrip extends AppCompatActivity {
                     }
                 })
                 .setNegativeButton(android.R.string.no, null).show();
+    }
+
+    @Override
+    public void onConnected(Bundle bundle) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            error("Don't have permission to use GPS");
+        }
+        Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        if (location == null)
+            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+
+        d(DEBUG_TAG, "Location services connected");
+    }
+
+    @Override
+    public void onConnectionSuspended(int i)
+    {
+        d(DEBUG_TAG, "Location services suspended. Please reconnect");
+    }
+
+    @Override
+    public void onLocationChanged(Location location)
+    {
+        addPoint(new DatabaseHandler(getBaseContext()));
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult result)
+    {
+
+    }
+
+    private void addPoint(DatabaseHandler databaseHandler)
+    {
+        d(DEBUG_TAG, "Trip " + tripId + ": Getting current point and adding to Database");
+        Point p = getCurrentPoint();
+        databaseHandler.addPoint(new Point(tripId, p.Time(), p.Longitude(), p.Latitude()));
+        currentTrip.addPoint(p);
     }
 
     public void endTrip() {
@@ -113,8 +183,13 @@ public class ActivityNewTrip extends AppCompatActivity {
                 return null;
             }
         }
+        mLocationRequest = LocationRequest.create()
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+                .setInterval(Constants.TIME_INTERVAL)
+                .setFastestInterval(Constants.TIME_INTERVAL);
+
         Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        //TODO: Deal with the LocationManager being null
+
         Double latitude = location.getLatitude();
         Double longitude = location.getLongitude();
         Point point = new Point(startTime, latitude, longitude);
