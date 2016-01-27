@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import nz.ones.ryanj.averagespeed.Activity.ActivityCustomListViewTrip;
+import nz.ones.ryanj.averagespeed.Activity.ActivityListTrips;
 import nz.ones.ryanj.averagespeed.DataObjects.Trip;
 
 /**
@@ -122,8 +122,8 @@ public class CustomTripAdapter extends BaseAdapter implements View.OnClickListen
 
         @Override
         public void onClick(View arg0) {
-            ActivityCustomListViewTrip sct = (ActivityCustomListViewTrip)activity;
-            /****  Call  onItemClick Method inside ActivityCustomListViewTrip Class ( See Below )****/
+            ActivityListTrips sct = (ActivityListTrips)activity;
+            /****  Call  onItemClick Method inside ActivityListTrips Class ( See Below )****/
             sct.onItemClick(mPosition);
         }
     }

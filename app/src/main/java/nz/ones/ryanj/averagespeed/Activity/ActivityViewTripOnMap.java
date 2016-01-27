@@ -70,6 +70,7 @@ public class ActivityViewTripOnMap extends FragmentActivity implements OnMapRead
             mMap.addMarker(new MarkerOptions().position(latLng));
         }
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(16.0f));
     }
 
     private void end(String errMsg)

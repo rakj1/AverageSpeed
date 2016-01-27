@@ -25,12 +25,12 @@ import static android.util.Log.d;
 /**
  * Created by Ryan Jones on 14/12/2015.
  */
-public class ActivityCustomListViewTrip extends AppCompatActivity{
+public class ActivityListTrips extends AppCompatActivity{
 
     private final String DEBUG_TAG =  "AverageSpeed." + getClass().getCanonicalName();
     private final int REQUEST_GPS = 1;
 
-    public ActivityCustomListViewTrip CustomListView = null;
+    public ActivityListTrips CustomListView = null;
     private ArrayList<Trip> trips = null;
     private DatabaseHandler db;
     private View mLayout;
@@ -92,7 +92,7 @@ public class ActivityCustomListViewTrip extends AppCompatActivity{
     {
         Trip tempTrip = trips.get(mPosition);
         d(DEBUG_TAG, "Opening Trip:" + mPosition + " " + tempTrip.Name());
-        Intent i = new Intent(getBaseContext(), ActivityDisplayTrip.class);
+        Intent i = new Intent(getBaseContext(), ActivityViewTrip.class);
         i.putExtra("TRIP_ID", tempTrip.ID());
         startActivity(i);
     }
@@ -111,7 +111,7 @@ public class ActivityCustomListViewTrip extends AppCompatActivity{
                             Snackbar.LENGTH_INDEFINITE).setAction("Ok", new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            ActivityCompat.requestPermissions(ActivityCustomListViewTrip.this, new String[]{permission}, RequestCode);
+                            ActivityCompat.requestPermissions(ActivityListTrips.this, new String[]{permission}, RequestCode);
                         }
                     }).show();
                     b = false;

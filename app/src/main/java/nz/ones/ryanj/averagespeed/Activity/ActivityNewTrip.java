@@ -131,7 +131,6 @@ public class ActivityNewTrip extends AppCompatActivity implements
         Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         if (location == null)
             LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
-
         d(DEBUG_TAG, "Location services connected");
     }
 

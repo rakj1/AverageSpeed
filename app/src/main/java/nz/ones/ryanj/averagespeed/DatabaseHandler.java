@@ -153,9 +153,24 @@ public class DatabaseHandler extends SQLiteOpenHelper
     }
     public void deleteTrip(Trip t)
     {
+        deleteTrip(t.ID());
+    }
+
+    public void deleteTrip(int tripId)
+    {
+        d(DEBUG_TAG, "Deleting trip: " + tripId);
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_TRIP, TRIP_ID + " =?",
-                new String[]{(String.valueOf(t.ID()))});
+                new String[]{(String.valueOf(tripId))});
+        db.close();
+    }
+
+    public void deleteTripAndPoints(int tripId)
+    {
+        deleteTrip(tripId);
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_POINT, POINT_TRIP_ID + " =?",
+                new String[]{(String.valueOf(tripId))});
         db.close();
     }
 
