@@ -83,6 +83,11 @@ public class Trip
         //Points.add(point);
     }
 
+    public void editName(String name)
+    {
+        _name = name;
+    }
+
     /** General Methods **/
     public String getTimeDifference()
     {

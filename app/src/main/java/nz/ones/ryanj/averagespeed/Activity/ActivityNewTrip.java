@@ -111,7 +111,7 @@ public class ActivityNewTrip extends AppCompatActivity implements
         // Double check the user wants to exit
         new AlertDialog.Builder(this)
                 .setTitle("End Trip")
-                .setMessage("Do you really want end this trip?")
+                .setMessage("Do you really want to end this trip?")
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 

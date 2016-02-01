@@ -4,4 +4,5 @@
     <string name="title_activity_activity_new_trip">ActivityNewTrip</string>
     <string name="title_activity_view_trip_on_mas">View Trip Path</string>
     <string name="action_delete">Delete Trip</string>
+    <string name="action_edit">Edit Trip</string>
 </resources>

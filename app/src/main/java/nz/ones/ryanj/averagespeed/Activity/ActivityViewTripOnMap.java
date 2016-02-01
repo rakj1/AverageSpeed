@@ -15,7 +15,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.List;
 
 import nz.ones.ryanj.averagespeed.DataObjects.Point;
-import nz.ones.ryanj.averagespeed.DataObjects.Trip;
 import nz.ones.ryanj.averagespeed.DatabaseHandler;
 import nz.ones.ryanj.averagespeed.R;
 
