@@ -2,6 +2,7 @@ package nz.ones.ryanj.averagespeed.Activity;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
@@ -9,12 +10,21 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Calendar;
+import java.util.Date;
+
+import nz.ones.ryanj.averagespeed.DataObjects.Point;
+import nz.ones.ryanj.averagespeed.DataObjects.Trip;
+import nz.ones.ryanj.averagespeed.DatabaseHandler;
 import nz.ones.ryanj.averagespeed.R;
 import nz.ones.ryanj.averagespeed.Util.Constants;
 
@@ -27,7 +37,13 @@ public class ActivityNewTrip extends AppCompatActivity implements LocationListen
     private TextView latitude;
     private TextView longitude;
     private LocationManager locationManager;
+    private Location lastLocation;
     private String provider;
+
+    private Trip currentTrip;
+    private long tripId;
+    private Point lastPoint;
+    private boolean firstPoint = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +56,17 @@ public class ActivityNewTrip extends AppCompatActivity implements LocationListen
         longitude = (TextView) findViewById(R.id.textViewLong);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        /********Boring UI binding********/
+        /*End Trip Button*/
+        Button endButton = (Button) findViewById(R.id.buttonEndTrip);
+        endButton.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                endTrip();
+            }
+        });
+        /********Boring UI binding********/
 
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Criteria criteria = new Criteria();
         provider = locationManager.getBestProvider(criteria, false);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
@@ -63,7 +88,73 @@ public class ActivityNewTrip extends AppCompatActivity implements LocationListen
         } else {
             latitude.setText("Location not available");
             longitude.setText("Location not available");
+            ExitWithError("Location not available");
         }
+
+        DatabaseHandler db = new DatabaseHandler(getBaseContext());
+        String tripName = "trip: " + Calendar.getInstance().getTime().toString();
+        d(DEBUG_TAG, "Starting trip \"" + tripName + "\" and adding to Database");
+        Point startingPoint = getCurrentPoint(Calendar.getInstance().getTime(), location);
+        currentTrip = new Trip(tripName, startingPoint);
+        tripId = db.addTrip(currentTrip);
+    }
+
+    private Point getCurrentPoint(Date time, Location location) {
+        Double latitude = location.getLatitude();
+        Double longitude = location.getLongitude();
+        Point point = new Point(time, latitude, longitude);
+        lastPoint = point;
+        return point;
+    }
+
+    private void addPoint(DatabaseHandler databaseHandler, Location location)
+    {
+        Date time = Calendar.getInstance().getTime();
+        lastLocation = location;
+        //Check if the previous point was added within 20 seconds of this one. If it was don't add the new one.
+        if (lastPoint != null &&((time.getTime() - lastPoint.Time().getTime()/1000) < 20)) {
+            d(DEBUG_TAG, "Point was within 20 seconds of last one not adding it");
+            return;
+        }
+        d(DEBUG_TAG, "Trip " + tripId + ": Getting current point and adding to Database");
+        Point p = getCurrentPoint(time ,location);
+        databaseHandler.addPoint(new Point(tripId, p.Time(), p.Longitude(), p.Latitude()));
+        if (!firstPoint)
+            currentTrip.addPoint(p);
+    }
+
+    private void endTrip() {
+        DatabaseHandler db = new DatabaseHandler(getBaseContext());
+        d(DEBUG_TAG, "Ending trip:" + currentTrip.ID() + ": Getting last point and adding to database");
+        Point p = getCurrentPoint(Calendar.getInstance().getTime(), lastLocation);
+        db.addPoint(new Point(tripId, p.Time(), p.Longitude(), p.Latitude()));
+        currentTrip = db.getTrip(tripId);
+        currentTrip.endTrip(p);
+        db.updateTrip(currentTrip);
+        finish();
+    }
+
+    private void ExitWithError(String message)
+    {
+        d(DEBUG_TAG, message);
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    @Override
+    public void onBackPressed() {
+        d(DEBUG_TAG, "User pressed back button");
+        // Double check the user wants to exit
+        new AlertDialog.Builder(this)
+                .setTitle("End Trip")
+                .setMessage("Do you really want to end this trip?")
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        endTrip();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, null).show();
     }
 
     @Override
@@ -105,6 +196,8 @@ public class ActivityNewTrip extends AppCompatActivity implements LocationListen
         float lng = (float) (location.getLongitude());
         latitude.setText(String.valueOf(lat));
         longitude.setText(String.valueOf(lng));
+        addPoint(new DatabaseHandler(this), location);
+        firstPoint = false;
     }
 
     @Override
