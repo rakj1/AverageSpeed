@@ -2,32 +2,11 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-nearby\8.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="9cad249cf62751a323d9af568caf12284b7d6062">
-        <dex dex="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\pre-dexed\debug\classes-c1c15ec159cb203213df7cf807f1c19d02391e90.jar" />
-    </item>
-    <item
-        jar="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wearable\8.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="e167a34eaca0b31704212f43f9576ea84e05046f">
-        <dex dex="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\pre-dexed\debug\classes-9004abbeecf5aba84daa76414a56866cbbcbe90f.jar" />
-    </item>
-    <item
         jar="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\8.4.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.2"
         sha1="b5e7892fb0708e792e0e933c4c0a0ca0ac7831fb">
         <dex dex="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\pre-dexed\debug\classes-63a831867f29eb8d5db2433e8e49abe2890af3e9.jar" />
-    </item>
-    <item
-        jar="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\exploded-aar\com.android.support\mediarouter-v7\23.0.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="d358b3dd49a7c67844622dcbc9cf4339e13952ce">
-        <dex dex="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\pre-dexed\debug\classes-b7620c0e40d2d85aafb0207cf7c63cd588cbee25.jar" />
     </item>
     <item
         jar="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-identity\8.4.0\jars\classes.jar"
@@ -37,109 +16,11 @@
         <dex dex="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\pre-dexed\debug\classes-3f9d19205ac00ff0bc5c61f19a308f1e027f1125.jar" />
     </item>
     <item
-        jar="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-location\8.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="a8412b654dab86d57bf90683367488211c8a81f1">
-        <dex dex="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\pre-dexed\debug\classes-12fa2eaa80372896d482dafc53bdd0946e1bd5e4.jar" />
-    </item>
-    <item
-        jar="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-safetynet\8.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="0194a7409c40de94fb539d4ad9928ec5d47afeb7">
-        <dex dex="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\pre-dexed\debug\classes-48256cf1be3440dbee196e7ad3487f921e4dae42.jar" />
-    </item>
-    <item
-        jar="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appinvite\8.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="9fe026fb4c7fce21bc5142f6e1bdf844f28061ac">
-        <dex dex="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\pre-dexed\debug\classes-c9593be09c8293e338f9fbd08e8f3c32b9bc1c29.jar" />
-    </item>
-    <item
         jar="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\exploded-aar\com.android.support\mediarouter-v7\23.0.0\jars\libs\internal_impl-23.0.0.jar"
         jumboMode="false"
         revision="23.0.2"
         sha1="03d38bb042efe3e5ce27ba66b729a9523c36d8fe">
         <dex dex="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\pre-dexed\debug\internal_impl-23.0.0-ecc070906061e8a84b9dd9d684385a8c0e9ea7bb.jar" />
-    </item>
-    <item
-        jar="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-cast\8.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="551e78f21acf69ebfb489c0e79647824c838013e">
-        <dex dex="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\pre-dexed\debug\classes-6bbad2786bccee74fabae0fd97a95a600b2492ac.jar" />
-    </item>
-    <item
-        jar="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\8.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="65d086ee9daaf87b5af62ad24471edafa433354c">
-        <dex dex="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\pre-dexed\debug\classes-2ffcdf97878a53e05e1a141b57c61ed180d850c9.jar" />
-    </item>
-    <item
-        jar="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-panorama\8.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="08d34b2d135c1cc96ab506fd8bf6916d1e2f391a">
-        <dex dex="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\pre-dexed\debug\classes-60455e0650c4e0671cf34ebdfdde00f3c7b4669a.jar" />
-    </item>
-    <item
-        jar="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-gcm\8.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="2d7fe76982677315c4dc4edfb459c8ca718a9d4c">
-        <dex dex="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\pre-dexed\debug\classes-660ac3484cac4aa5e7614363866c449c59ed0d82.jar" />
-    </item>
-    <item
-        jar="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-fitness\8.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="c54246475c1bb64ac6857d1320364bfbfeda2c46">
-        <dex dex="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\pre-dexed\debug\classes-39aacb1612abcbe880ab2d3b4e35eecb9ba0d3a8.jar" />
-    </item>
-    <item
-        jar="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wallet\8.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="f2df436a8f02ce7e4d7d209671fc45f97c470f0e">
-        <dex dex="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\pre-dexed\debug\classes-6941c98eff72992ebf4241346d8e647ca1687083.jar" />
-    </item>
-    <item
-        jar="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-games\8.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="3a364cc6b698d1b3b2d284f64618daaa7fe77ddf">
-        <dex dex="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\pre-dexed\debug\classes-b0e500f16d8e20e7d2e14412de674077d3390058.jar" />
-    </item>
-    <item
-        jar="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-auth\8.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="966e5771a5a2ebfb31bf00d7cd6cd2546d245517">
-        <dex dex="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\pre-dexed\debug\classes-7ebea56fb451042b9f3d6f6c90a10ff2242e42f2.jar" />
-    </item>
-    <item
-        jar="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-measurement\8.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="613298b7aa012f121ce542881c0a599ebd8078f2">
-        <dex dex="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\pre-dexed\debug\classes-1b7b230647991f503d3ea659a07591f05c0f0e0e.jar" />
-    </item>
-    <item
-        jar="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-plus\8.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="1a78298e7724d5440d210bcb946b3493250d354d">
-        <dex dex="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\pre-dexed\debug\classes-bd6d82768b509356fca1e1c1bbac0120297257c6.jar" />
-    </item>
-    <item
-        jar="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-vision\8.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="dfecc4d835cdabcdecf7e95f0d20a3ef1e9d8ef4">
-        <dex dex="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\pre-dexed\debug\classes-1a8bf608a14524199830db7f7c1254436b915833.jar" />
     </item>
     <item
         jar="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-drive\8.4.0\jars\classes.jar"
@@ -149,11 +30,144 @@
         <dex dex="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\pre-dexed\debug\classes-33b300c09f788c182ea2199c072d06eeb8838fe7.jar" />
     </item>
     <item
+        jar="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-plus\8.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="1a78298e7724d5440d210bcb946b3493250d354d">
+        <dex dex="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\pre-dexed\debug\classes-bd6d82768b509356fca1e1c1bbac0120297257c6.jar" />
+    </item>
+    <item
+        jar="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-nearby\8.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="9cad249cf62751a323d9af568caf12284b7d6062">
+        <dex dex="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\pre-dexed\debug\classes-c1c15ec159cb203213df7cf807f1c19d02391e90.jar" />
+    </item>
+    <item
+        jar="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-measurement\8.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="613298b7aa012f121ce542881c0a599ebd8078f2">
+        <dex dex="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\pre-dexed\debug\classes-1b7b230647991f503d3ea659a07591f05c0f0e0e.jar" />
+    </item>
+    <item
+        jar="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\exploded-aar\com.android.support\mediarouter-v7\23.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="d358b3dd49a7c67844622dcbc9cf4339e13952ce">
+        <dex dex="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\pre-dexed\debug\classes-b7620c0e40d2d85aafb0207cf7c63cd588cbee25.jar" />
+    </item>
+    <item
+        jar="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-gcm\8.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="2d7fe76982677315c4dc4edfb459c8ca718a9d4c">
+        <dex dex="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\pre-dexed\debug\classes-660ac3484cac4aa5e7614363866c449c59ed0d82.jar" />
+    </item>
+    <item
+        jar="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-games\8.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="3a364cc6b698d1b3b2d284f64618daaa7fe77ddf">
+        <dex dex="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\pre-dexed\debug\classes-b0e500f16d8e20e7d2e14412de674077d3390058.jar" />
+    </item>
+    <item
+        jar="C:\Users\rakjo\.gradle\caches\modules-2\files-2.1\io.reactivex\rxjava\1.0.14\898f9ab61e2a23afd615f0b0389478bec86f49f9\rxjava-1.0.14.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="898f9ab61e2a23afd615f0b0389478bec86f49f9">
+        <dex dex="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\pre-dexed\debug\rxjava-1.0.14-4c17bb1913a70d401eba1ceca6982d443f7795c4.jar" />
+    </item>
+    <item
+        jar="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-vision\8.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="dfecc4d835cdabcdecf7e95f0d20a3ef1e9d8ef4">
+        <dex dex="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\pre-dexed\debug\classes-1a8bf608a14524199830db7f7c1254436b915833.jar" />
+    </item>
+    <item
+        jar="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\8.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="65d086ee9daaf87b5af62ad24471edafa433354c">
+        <dex dex="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\pre-dexed\debug\classes-2ffcdf97878a53e05e1a141b57c61ed180d850c9.jar" />
+    </item>
+    <item
         jar="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-analytics\8.4.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.2"
         sha1="1c9f35e952b212c843f7bd2c7eec8e82ad95602e">
         <dex dex="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\pre-dexed\debug\classes-a0517118f4ac58b97d65c9ac1a8f17ed31f70ad8.jar" />
+    </item>
+    <item
+        jar="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appinvite\8.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="9fe026fb4c7fce21bc5142f6e1bdf844f28061ac">
+        <dex dex="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\pre-dexed\debug\classes-c9593be09c8293e338f9fbd08e8f3c32b9bc1c29.jar" />
+    </item>
+    <item
+        jar="C:\Users\rakjo\.gradle\caches\modules-2\files-2.1\io.reactivex\rxandroid\0.25.0\866b539d3ae58abbd47880f243c02f914fec5cda\rxandroid-0.25.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="866b539d3ae58abbd47880f243c02f914fec5cda">
+        <dex dex="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\pre-dexed\debug\rxandroid-0.25.0-53025e99a7bf92e5ee70dc229bf504f95857df7b.jar" />
+    </item>
+    <item
+        jar="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wallet\8.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="f2df436a8f02ce7e4d7d209671fc45f97c470f0e">
+        <dex dex="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\pre-dexed\debug\classes-6941c98eff72992ebf4241346d8e647ca1687083.jar" />
+    </item>
+    <item
+        jar="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-panorama\8.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="08d34b2d135c1cc96ab506fd8bf6916d1e2f391a">
+        <dex dex="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\pre-dexed\debug\classes-60455e0650c4e0671cf34ebdfdde00f3c7b4669a.jar" />
+    </item>
+    <item
+        jar="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-auth\8.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="966e5771a5a2ebfb31bf00d7cd6cd2546d245517">
+        <dex dex="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\pre-dexed\debug\classes-7ebea56fb451042b9f3d6f6c90a10ff2242e42f2.jar" />
+    </item>
+    <item
+        jar="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-fitness\8.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="c54246475c1bb64ac6857d1320364bfbfeda2c46">
+        <dex dex="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\pre-dexed\debug\classes-39aacb1612abcbe880ab2d3b4e35eecb9ba0d3a8.jar" />
+    </item>
+    <item
+        jar="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-safetynet\8.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="0194a7409c40de94fb539d4ad9928ec5d47afeb7">
+        <dex dex="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\pre-dexed\debug\classes-48256cf1be3440dbee196e7ad3487f921e4dae42.jar" />
+    </item>
+    <item
+        jar="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-location\8.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="a8412b654dab86d57bf90683367488211c8a81f1">
+        <dex dex="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\pre-dexed\debug\classes-12fa2eaa80372896d482dafc53bdd0946e1bd5e4.jar" />
+    </item>
+    <item
+        jar="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wearable\8.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="e167a34eaca0b31704212f43f9576ea84e05046f">
+        <dex dex="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\pre-dexed\debug\classes-9004abbeecf5aba84daa76414a56866cbbcbe90f.jar" />
+    </item>
+    <item
+        jar="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-cast\8.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="551e78f21acf69ebfb489c0e79647824c838013e">
+        <dex dex="C:\Users\rakjo\Documents\Git\AverageSpeed\app\build\intermediates\pre-dexed\debug\classes-6bbad2786bccee74fabae0fd97a95a600b2492ac.jar" />
     </item>
 
 </items>
