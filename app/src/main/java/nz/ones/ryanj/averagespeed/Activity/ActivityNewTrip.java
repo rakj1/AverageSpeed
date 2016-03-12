@@ -19,6 +19,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import java.util.Calendar;
 import java.util.Date;
 
@@ -26,6 +28,7 @@ import nz.ones.ryanj.averagespeed.DataObjects.Point;
 import nz.ones.ryanj.averagespeed.DataObjects.Trip;
 import nz.ones.ryanj.averagespeed.DatabaseHandler;
 import nz.ones.ryanj.averagespeed.R;
+import nz.ones.ryanj.averagespeed.Util.Calc;
 import nz.ones.ryanj.averagespeed.Util.Constants;
 
 import static android.util.Log.d;
@@ -33,9 +36,13 @@ import static android.util.Log.d;
 public class ActivityNewTrip extends AppCompatActivity implements LocationListener {
 
     private final String DEBUG_TAG = "AverageSpeed." + getClass().getCanonicalName();
+    private final int UPDATE_TIME = 400;
+    private final int UPDATE_DISTANCE = 10;
 
-    private TextView latitude;
-    private TextView longitude;
+    private TextView tvLatitude;
+    private TextView tvLongitude;
+    private TextView tvSpeed;
+    private TextView tvDistance;
     private LocationManager locationManager;
     private Location lastLocation;
     private String provider;
@@ -44,6 +51,7 @@ public class ActivityNewTrip extends AppCompatActivity implements LocationListen
     private long tripId;
     private Point lastPoint;
     private boolean firstPoint = true;
+    private float tripDistance = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +60,10 @@ public class ActivityNewTrip extends AppCompatActivity implements LocationListen
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        latitude = (TextView) findViewById(R.id.textViewLat);
-        longitude = (TextView) findViewById(R.id.textViewLong);
+        tvLatitude = (TextView) findViewById(R.id.textViewLat);
+        tvLongitude = (TextView) findViewById(R.id.textViewLong);
+        tvSpeed = (TextView) findViewById(R.id.textViewSpeed);
+        tvDistance = (TextView) findViewById(R.id.textViewDistance);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         /********Boring UI binding********/
@@ -86,8 +96,8 @@ public class ActivityNewTrip extends AppCompatActivity implements LocationListen
             d(DEBUG_TAG, "Provider " + provider + " has been selected.");
             onLocationChanged(location);
         } else {
-            latitude.setText("Location not available");
-            longitude.setText("Location not available");
+            tvLatitude.setText("Location not available");
+            tvLongitude.setText("Location not available");
             ExitWithError("Location not available");
         }
 
@@ -110,9 +120,8 @@ public class ActivityNewTrip extends AppCompatActivity implements LocationListen
     private void addPoint(DatabaseHandler databaseHandler, Location location)
     {
         Date time = Calendar.getInstance().getTime();
-        lastLocation = location;
         //Check if the previous point was added within 20 seconds of this one. If it was don't add the new one.
-        if (lastPoint != null &&((time.getTime() - lastPoint.Time().getTime()/1000) < 20)) {
+        if (lastPoint != null &&((time.getTime() - lastPoint.Time().getTime()) < Constants.TIME_INTERVAL)) {
             d(DEBUG_TAG, "Point was within 20 seconds of last one not adding it");
             return;
         }
@@ -160,7 +169,8 @@ public class ActivityNewTrip extends AppCompatActivity implements LocationListen
     @Override
     protected void onResume() {
         super.onResume();
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
@@ -170,14 +180,15 @@ public class ActivityNewTrip extends AppCompatActivity implements LocationListen
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-        locationManager.requestLocationUpdates(provider, Constants.TIME_INTERVAL, 20, this);
+        locationManager.requestLocationUpdates(provider, UPDATE_TIME, UPDATE_DISTANCE, this);
     }
 
     /* Remove the locationlistener updates when Activity is paused */
     @Override
     protected void onPause() {
         super.onPause();
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
@@ -192,10 +203,26 @@ public class ActivityNewTrip extends AppCompatActivity implements LocationListen
 
     @Override
     public void onLocationChanged(Location location) {
-        float lat = (float) (location.getLatitude());
-        float lng = (float) (location.getLongitude());
-        latitude.setText(String.valueOf(lat));
-        longitude.setText(String.valueOf(lng));
+        double lat = location.getLatitude();
+        double lng = location.getLongitude();
+        tvLatitude.setText("Latitude: " + String.valueOf(lat));
+        tvLongitude.setText("Longitude: " + String.valueOf(lng));
+        lastLocation = location;
+
+        // Get the distance in meters and the time in milliseconds
+        if (lastPoint != null) {
+            // Code from
+            // https://stackoverflow.com/questions/837872/calculate-distance-in-meters-when-you-know-longitude-and-latitude-in-java
+
+            float distance = Calc.distFrom(lat, lng, lastPoint.Latitude(), lastPoint.Longitude());
+            tripDistance += (distance / 1000);
+            tvDistance.setText("Distance: " + String.valueOf(tripDistance));
+            float time = Calendar.getInstance().getTime().getTime() - lastPoint.Time().getTime();
+            // Convert m/ms -> m/s -> kph
+            float speed = (((distance / time)/1000) * 3.6f);
+            tvSpeed.setText("Speed: " + String.valueOf(speed) + " km/h");
+        }
+
         addPoint(new DatabaseHandler(this), location);
         firstPoint = false;
     }
