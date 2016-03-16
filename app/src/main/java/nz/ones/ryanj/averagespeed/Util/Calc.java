@@ -5,7 +5,8 @@ package nz.ones.ryanj.averagespeed.Util;
  */
 public class Calc
 {
-
+    // Code from
+    // https://stackoverflow.com/questions/837872/calculate-distance-in-meters-when-you-know-longitude-and-latitude-in-java
     public static float distFrom(double lat1, double lng1, double lat2, double lng2) {
         double earthRadius = 6371000; //meters
         double dLat = Math.toRadians(lat2-lat1);

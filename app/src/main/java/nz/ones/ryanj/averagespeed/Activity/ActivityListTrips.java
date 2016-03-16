@@ -19,6 +19,7 @@ import nz.ones.ryanj.averagespeed.CustomTripAdapter;
 import nz.ones.ryanj.averagespeed.DatabaseHandler;
 import nz.ones.ryanj.averagespeed.R;
 import nz.ones.ryanj.averagespeed.DataObjects.Trip;
+import nz.ones.ryanj.averagespeed.Util.Calc;
 
 import static android.util.Log.d;
 

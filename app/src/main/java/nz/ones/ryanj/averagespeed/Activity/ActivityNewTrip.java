@@ -19,8 +19,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import java.util.Calendar;
 import java.util.Date;
 
@@ -45,6 +43,7 @@ public class ActivityNewTrip extends AppCompatActivity implements LocationListen
     private TextView tvDistance;
     private LocationManager locationManager;
     private Location lastLocation;
+    private Date lastTime;
     private String provider;
 
     private Trip currentTrip;
@@ -205,24 +204,25 @@ public class ActivityNewTrip extends AppCompatActivity implements LocationListen
     public void onLocationChanged(Location location) {
         double lat = location.getLatitude();
         double lng = location.getLongitude();
+        Date now = Calendar.getInstance().getTime();
         tvLatitude.setText("Latitude: " + String.valueOf(lat));
         tvLongitude.setText("Longitude: " + String.valueOf(lng));
-        lastLocation = location;
 
         // Get the distance in meters and the time in milliseconds
         if (lastPoint != null) {
-            // Code from
-            // https://stackoverflow.com/questions/837872/calculate-distance-in-meters-when-you-know-longitude-and-latitude-in-java
-
-            float distance = Calc.distFrom(lat, lng, lastPoint.Latitude(), lastPoint.Longitude());
-            tripDistance += (distance / 1000);
+            float distance = Calc.distFrom(lat, lng, lastLocation.getLatitude(), lastLocation.getLongitude());
+            tripDistance += (distance);
             tvDistance.setText("Distance: " + String.valueOf(tripDistance));
-            float time = Calendar.getInstance().getTime().getTime() - lastPoint.Time().getTime();
-            // Convert m/ms -> m/s -> kph
-            float speed = (((distance / time)/1000) * 3.6f);
+            float deltaTime = now.getTime() - lastTime.getTime();
+            // Convert ms -> s
+            deltaTime = deltaTime/1000;
+            // Convert m/s -> kph
+            float speed = ((distance / deltaTime) * 3.6f);
             tvSpeed.setText("Speed: " + String.valueOf(speed) + " km/h");
         }
 
+        lastLocation = location;
+        lastTime = now;
         addPoint(new DatabaseHandler(this), location);
         firstPoint = false;
     }
