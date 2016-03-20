@@ -1,5 +1,7 @@
 package nz.ones.ryanj.averagespeed.Util;
 
+import java.util.Date;
+
 /**
  * Created by Ryan Jones on 12/03/2016.
  */
@@ -18,5 +20,14 @@ public class Calc
         float dist = (float) (earthRadius * c);
 
         return dist;
+    }
+
+    // Calculates the average speed
+    // Takes the distance in metres
+    public static double averageSpeed(double distance, Date startTime, Date endTime)
+    {
+        // Time the trip took in seconds
+        long deltaTime = (endTime.getTime() - startTime.getTime())/1000;
+        return ((distance/deltaTime)*3.6);
     }
 }

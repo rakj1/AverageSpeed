@@ -7,6 +7,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+import nz.ones.ryanj.averagespeed.Util.Calc;
+
 import static android.util.Log.d;
 
 /**
@@ -64,18 +66,20 @@ public class Trip
     public Date EndTime() {return _endTime;}
     public String Distance()
     {
-        return "Null";
+        return _distance;
     }
     public String AverageSpeed()
     {
-        return "Null";
+        return _averageSpeed;
     }
 
     /**Setter Methods**/
-    public void endTrip(Point endingPoint)
+    public void endTrip(Point endingPoint, double distance)
     {
         //Points.add(endingPoint);
         _endTime = endingPoint.Time();
+        _distance = (distance/1000) + " km";
+        _averageSpeed = Calc.averageSpeed(distance, _startTime, _endTime) + " km/h";
     }
 
     public void addPoint(Point point)

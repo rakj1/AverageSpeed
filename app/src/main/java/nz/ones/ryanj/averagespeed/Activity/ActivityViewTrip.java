@@ -167,9 +167,9 @@ public class ActivityViewTrip extends AppCompatActivity {
         TripTime.setText(thisTrip.getTimeDifference());
 
         TextView AverageSpeed = (TextView) findViewById(R.id.textViewAverage);
-        //AverageSpeed.setText(TODO);
+        AverageSpeed.setText(thisTrip.AverageSpeed());
         TextView Distance = (TextView) findViewById(R.id.textViewDistance);
-        //Distance.setText(TODO);
+        Distance.setText(thisTrip.Distance());
     }
 
     private void end(String errMsg)

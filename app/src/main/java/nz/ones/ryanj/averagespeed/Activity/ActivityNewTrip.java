@@ -50,7 +50,7 @@ public class ActivityNewTrip extends AppCompatActivity implements LocationListen
     private long tripId;
     private Point lastPoint;
     private boolean firstPoint = true;
-    private float tripDistance = 0;
+    private float tripDistance = 0;             // The trip distance in metres
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,7 +137,7 @@ public class ActivityNewTrip extends AppCompatActivity implements LocationListen
         Point p = getCurrentPoint(Calendar.getInstance().getTime(), lastLocation);
         db.addPoint(new Point(tripId, p.Time(), p.Longitude(), p.Latitude()));
         currentTrip = db.getTrip(tripId);
-        currentTrip.endTrip(p);
+        currentTrip.endTrip(p, tripDistance);
         db.updateTrip(currentTrip);
         finish();
     }
