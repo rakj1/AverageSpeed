@@ -19,7 +19,6 @@ import nz.ones.ryanj.averagespeed.CustomTripAdapter;
 import nz.ones.ryanj.averagespeed.DatabaseHandler;
 import nz.ones.ryanj.averagespeed.R;
 import nz.ones.ryanj.averagespeed.DataObjects.Trip;
-import nz.ones.ryanj.averagespeed.Util.Calc;
 
 import static android.util.Log.d;
 
@@ -41,6 +40,8 @@ public class ActivityListTrips extends AppCompatActivity{
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_list_view_trip);
+        mLayout = findViewById(R.id.list_trips_layout);
+
         db = new DatabaseHandler(getBaseContext());
 
         /********Boring UI binding********/
@@ -108,14 +109,18 @@ public class ActivityListTrips extends AppCompatActivity{
                 d(DEBUG_TAG, "Don't have " + permission +". Asking for it.");
                 if (ActivityCompat.shouldShowRequestPermissionRationale(this, permission)) {
                     d(DEBUG_TAG, "Asking for permission with rational.");
-                    Snackbar.make(mLayout, "The App needs " + permission + " to work correctly.",
-                            Snackbar.LENGTH_INDEFINITE).setAction("Ok", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            ActivityCompat.requestPermissions(ActivityListTrips.this, new String[]{permission}, RequestCode);
-                        }
-                    }).show();
                     b = false;
+                    Snackbar.make(mLayout, "The App needs " + permission + " to work correctly.",
+                            Snackbar.LENGTH_INDEFINITE)
+                            .setAction("Ok", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    ActivityCompat
+                                            .requestPermissions(ActivityListTrips.this, new String[]{permission},
+                                                    RequestCode);
+                                }
+                            })
+                            .show();
                 } else {
                     d(DEBUG_TAG, "Asking for permission directly.");
                     // Permission has not been granted yet. Request it directly.
