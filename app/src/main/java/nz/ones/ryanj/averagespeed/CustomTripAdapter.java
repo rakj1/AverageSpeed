@@ -85,11 +85,7 @@ public class CustomTripAdapter extends BaseAdapter implements View.OnClickListen
         else
             holder=(ViewHolder)vi.getTag();
 
-        if(data.size()<=0)
-        {
-            holder.name.setText("No Data");
-        }
-        else
+        if (data.size() > 0)
         {
             /***** Get each Model object from Arraylist ********/
             tempValues=null;
